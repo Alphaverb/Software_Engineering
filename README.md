@@ -25,4 +25,7 @@
 - к.э.н., доцент Панов М.А.
 
 ## 2.1. Установка
-
+### Результат
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/211.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/212.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/213.png)
