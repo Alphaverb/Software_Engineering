@@ -60,8 +60,12 @@
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/255.png)
 
 ## 2.6. Подключение к удаленному репозиторию
-### Добавление изменений в стэш:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/261.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/262.png)
+### Добавление изменений в стэш
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/263.png)
 ### Возврат к сохраненным изменениям:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/264.png)
 
 ## 2.7. Ветвление
 ### Создание новой ветки:
