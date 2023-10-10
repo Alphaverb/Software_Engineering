@@ -76,13 +76,24 @@
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/273.png)
 
 ## 2.8. Особенности применения "Фэтч"
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/281.png)
 
 ## 2.9. Удаление файлов, веток, локальных и удаленных репозиториев
 ### Удаление файла:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/291.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/292.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/293.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/294.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/295.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/296.png)
 ### Удаление локальной ветки:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/297.png)
 ### Удаление удаленной ветки:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/298.png)
 ### Удаление локального репозитория:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/299.png)
 ### Удаление удаленного репозитория:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2910.png)
 
 ## 2.10. Отслеживание изменений в коммитах
 
