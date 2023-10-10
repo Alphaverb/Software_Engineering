@@ -109,8 +109,11 @@
 
 ## 2.12. Возвращение к предыдущему коммиту
 ### Сброс до предыдущего коммита (с потерей изменений):
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2121.png)
 ### Сброс до предыдущего коммита (с сохранением изменений в рабочей директории):
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2122.png)
 ### Сброс до конкретного коммита:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2123.png)
 
 ## 2.13. Исправление коммита
 ### Исправление последнего коммита:
