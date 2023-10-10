@@ -125,6 +125,11 @@
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2135.png)
 
 ## 2.14. Разрешение конфликтов при слиянии
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2141.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2142.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2143.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2144.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2145.png)
 
 ## 2.15. Настройка .gitignore
 
