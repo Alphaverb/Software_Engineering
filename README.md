@@ -122,6 +122,7 @@
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2132.png)
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2133.png)
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2134.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2135.png)
 
 ## 2.14. Разрешение конфликтов при слиянии
 
