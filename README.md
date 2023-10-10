@@ -69,8 +69,11 @@
 
 ## 2.7. Ветвление
 ### Создание новой ветки:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/271.png)
 ### Переключение на новую ветку:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/272.png)
 ### Слияние веток:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/273.png)
 
 ## 2.8. Особенности применения "Фэтч"
 
