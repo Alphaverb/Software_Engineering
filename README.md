@@ -117,7 +117,11 @@
 
 ## 2.13. Исправление коммита
 ### Исправление последнего коммита:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2131.png)
 ### Исправление более раннего коммита:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2132.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2133.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2134.png)
 
 ## 2.14. Разрешение конфликтов при слиянии
 
