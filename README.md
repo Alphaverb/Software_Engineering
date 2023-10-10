@@ -103,6 +103,9 @@
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2103.png)
 
 ## 2.11. Возвращение файла к предыдущему (определенному) состоянию
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2111.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2112.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2113.png)
 
 ## 2.12. Возвращение к предыдущему коммиту
 ### Сброс до предыдущего коммита (с потерей изменений):
