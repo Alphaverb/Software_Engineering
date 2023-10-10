@@ -96,6 +96,11 @@
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2910.png)
 
 ## 2.10. Отслеживание изменений в коммитах
+### git log:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2101.png)
+### git diff:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2102.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/2103.png)
 
 ## 2.11. Возвращение файла к предыдущему (определенному) состоянию
 
