@@ -42,15 +42,22 @@
 
 ## 2.4. Подготовка файлов
 ### Добавление одного файла:
-### Проверка статуса:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/241.png)
+### Проверка статуса
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/242.png)
 
 ## 2.5. Фиксация изменений
 ### Как сделать коммит:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/251.png)
 ### Как просмотреть коммиты
 ### Просмотр истории коммитов:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/252.png)
 ### Ограничение количества выводимых коммитов:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/253.png)
 ### Краткий вывод коммитов:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/254.png)
 ### Графическое представление истории:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/255.png)
 
 ## 2.6. Подключение к удаленному репозиторию
 ### Добавление изменений в стэш:
@@ -67,6 +74,8 @@
 ### Удаление файла:
 ### Удаление локальной ветки:
 ### Удаление удаленной ветки:
+### Удаление локального репозитория:
+### Удаление удаленного репозитория:
 
 ## 2.10. Отслеживание изменений в коммитах
 
