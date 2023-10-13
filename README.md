@@ -29,6 +29,4 @@ print(1.23)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/211.png)
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/212.png)
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_1/pic/213.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
