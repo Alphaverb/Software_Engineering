@@ -160,7 +160,7 @@ print(bool(boolean))
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/S21.png)
 
 ## Выводы
 
@@ -179,7 +179,7 @@ print(one, two, three)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/S22.png)
 
 ## Выводы
 
@@ -198,7 +198,8 @@ print("Вы ввели: ", num)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/S231.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/S232.png)
 
 ## Выводы
 
@@ -217,7 +218,7 @@ print(line * 6)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/S24.png)
 
 ## Выводы
 
@@ -236,7 +237,7 @@ print(f"Сегодня {int(day)} день, {str(month)} месяц, {int(year)}
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/S25.png)
 
 ## Выводы
 
@@ -254,7 +255,7 @@ print("Hello", "World", sep=" my ")
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/S26.png)
 
 ## Выводы
 
@@ -273,7 +274,7 @@ print("Длина строки: ", len(line))
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/S27.png)
 
 ## Выводы
 
@@ -292,7 +293,7 @@ print(line.lower())
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/S28.png)
 
 ## Выводы
 
@@ -312,7 +313,7 @@ print(f"Для введенного числа следующим будет ч�
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/S29.png)
 
 ## Выводы
 
@@ -332,7 +333,7 @@ print(line[::-1][0:])
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/S210.png)
 
 ## Выводы
 
