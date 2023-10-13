@@ -42,7 +42,7 @@ print(1.23)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L22.png)
 
 ## Лабораторная работа №3
 ### Выведите в консоль три строки. Первая – обычная строка. Вторая – F строка с использованием заранее объявленной переменной. Третья – сложите две или более строк в одну.
@@ -54,7 +54,7 @@ print(1.23)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L23.png)
 
 ## Лабораторная работа №4
 ### Выведите в консоль три строки. Первая – трансформация любого типа переменной в bool. Вторая – трансформация любого типа переменной в float или int. Третья – трансформация любого типа переменной в str.
@@ -66,7 +66,7 @@ print(1.23)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L24.png)
 
 ## Лабораторная работа №5
 ### Присвойте трем переменным различные значения, воспользовавшись функцией input().
@@ -78,7 +78,7 @@ print(1.23)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L25.png)
 
 ## Лабораторная работа №6
 ### Создайте две любые числовые переменные и выполните над ними несколько математических операций: возведение в степень, обычное деление, целочисленное деление, нахождение остатка от деления. При желании вы можете проверить как работают эти вычисления с разными типами данных, например, сначала создать две переменные int, затем создать две переменные float и наконец создать переменные типа int и float и провести над ними операции, прописанные выше.
@@ -90,7 +90,7 @@ print(1.23)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L26.png)
 
 ## Лабораторная работа №7
 ### Создайте любую строковую переменную и произведите над ней математическое действие умножение на любое число.
@@ -102,7 +102,7 @@ print(1.23)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L27.png)
 
 ## Лабораторная работа №8
 ### Посчитайте сколько раз символ ‘o’ встречается в строке ‘Hello World’.
@@ -114,7 +114,7 @@ print(1.23)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L28.png)
 
 ## Лабораторная работа №9
 ### Напишите предложение ‘Hello World’ в две строки. Написанная программа должна занимать одну строку в редакторе кода.
@@ -126,7 +126,7 @@ print(1.23)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L29.png)
 
 ## Лабораторная работа №10
 ### Из предложения ‘Hello World’ выведите в консоль только 2 символ, а затем выведите слово ‘Hello’.
@@ -138,7 +138,7 @@ print(1.23)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L210.png)
 
 # Самостоятельные работы
 ## Самостоятельная работа №1
