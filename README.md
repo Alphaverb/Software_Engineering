@@ -33,7 +33,7 @@ else:
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L21.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L31.png)
 
 ## Лабораторная работа №2
 ### Напишите программу, которая будет определять значения переменной меньше 0, больше 0 и меньше 10 или больше 10. Это нужно реализовать при помощи одной переменной, значение которой будет вводится через консоль, а также при помощи конструкций if, elif, else.
@@ -49,7 +49,7 @@ else:
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L22.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L32.png)
 
 ## Лабораторная работа №3
 ### Напишите программу, в которой будет проверяться есть ли переменная в указанном массиве используя логический оператор in. Самостоятельно посмотрите, как работает программа со значениями которых нет в массиве numbers.
@@ -64,7 +64,7 @@ else:
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L23.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L33.png)
 
 ## Лабораторная работа №4
 ### Напишите программу, которая будет определять находится ли переменная в указанном массиве и если да, то проверьте четная она или нет. Самостоятельно протестируйте данную программу с разными значениями переменной value.
@@ -82,7 +82,7 @@ else:
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L24.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L34.png)
 
 ## Лабораторная работа №5
 ### Напишите программу, в которой циклом for значения переменной i будут меняться от 0 до 10 и посмотрите, как разные виды сравнений и операций работают в цикле.
@@ -103,7 +103,7 @@ for i in range(10):
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L25.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L35.png)
 
 ## Лабораторная работа №6
 ### Напишите программу, в которой при помощи цикла for определяется есть ли переменная value в строке string и посмотрите, как работает оператор else для циклов. Самостоятельно посмотрите, что выведет программа, если значение переменной value оказалось в строке string. 
@@ -125,7 +125,7 @@ else:
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L26.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L36.png)
 
 ## Лабораторная работа №7
 ### Напишите программу, в которой вы наглядно посмотрите, как работает цикл for проходя в обратном порядке, то есть, к примеру не от 0 до 10, а от 10 до 0. В уже готовой программе показано вычитание из 100, а вам во время реализации программы будет необходимо придумать свой вариант применения обратного цикла.
@@ -138,7 +138,7 @@ for i in range(10, -1, -1):
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L27.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L37.png)
 
 ## Лабораторная работа №8
 ### Напишите программу используя цикл while, внутри которого есть какие-либо проверки, но быть осторожным, поскольку циклы while при неправильно написанных условиях могут становится бесконечными.
@@ -156,9 +156,9 @@ while value < 100:
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L28.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L381.png)
 ### Если поменять значения в 5 строке с 2 на 1, то код заработает (поскольку поступающая на вход 10 делится на 5, давая в результате частное 2, в первом случае строгий знак равенства > 2 не позволял циклу пройти второе условие).
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L28.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L382.png)
 
 ## Лабораторная работа №9
 ### Напишите программу с использованием вложенных циклов и одной проверкой внутри них. Самое главное, не забудьте, что нельзя использовать одинаковые имена итерируемых переменных, когда вы используете вложенные циклы.
@@ -175,7 +175,7 @@ print(value)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L29.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L39.png)
 
 ## Лабораторная работа №10
 ### Напишите программу с использованием flag, которое будет определять есть ли нечетное число в массиве. В данной задаче flag выступает в роли индикатора встречи нечетного числа в исходном массиве, четных чисел.
@@ -193,7 +193,7 @@ else:
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_2/pic/L210.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L310.png)
 
 # Самостоятельные работы
 ## Самостоятельная работа №1
