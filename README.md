@@ -24,138 +24,190 @@
 ### Напишите функцию, которая выполняет любые арифметические действия и выводит результат в консоль. Вызовите функцию используя “точку входа”.
 
 ```python
-one = int(input('Введите значение первой переменной: '))
-two = int(input('Введите значение второй переменной: '))
-if one >= two:
-    print('Выполняется')
-else:
-    print('Не выполняется')
+def main():
+    print(2 + 2)
+    
+if __name__ == '__main__':
+    main()
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L31.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L41.png)
 
 ## Лабораторная работа №2
 ### Напишите функцию, которая выполняет любые арифметические действия, возвращает при помощи return значение в место, откуда вызывали функцию. Выведите результат в консоль. Вызовите функцию используя “точку входа”.
 
 ```python
-one = int(input('Введите значение переменной: '))
-if one < 0:
-    print('Переменная меньше 0')
-elif 0 < one < 10:
-    print('Переменная больше 0 и меньше 10')
-else:
-    print('Переменная больше либо равна 10')
+def main():
+    return 2 + 2
+
+if __name__ == '__main__':
+    print(main())
+```
+
+#### Развернутый вид:
+```python
+def main():
+    result = 2 + 2
+    return result
+
+if __name__ == '__main__':
+    answer = main()
+    print(answer)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L32.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L421.png)
+
+#### Развернутый вид:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L422.png)
 
 ## Лабораторная работа №3
 ### Напишите функцию, в которую передаются два аргумента, над ними производится арифметическое действие, результат возвращается туда, откуда эту функцию вызывали. Выведите результат в консоль. Вызовите функцию в любом небольшом цикле.
 
 ```python
-numbers = [1, 2, 3, 6, 8, 9]
-value = int(input('Введите значение переменной: '))
-if value in numbers:
-    print('Переменная есть в данном массиве')
-else:
-    print('Переменной нет в данном массиве')
+def main(one, two):
+    result = one + two
+    return result
+
+for i in range(5):
+    x = 1
+    y = 10
+    answer = main(x, y)
+```
+
+#### Аргументы передаются в вызове функции:
+```python
+def main(one, two):
+    return one + two
+
+for i in range(5):
+    answer = main(one=1, two=10)
+    print(answer)
 ```
 
 ### Результат.
-#### Переменная есть в массиве:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L33.png)
-#### Переменной нет в массиве:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L332.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L431.png)
+
+#### Аргументы передаются в вызове функции:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L432.png)
 
 ## Лабораторная работа №4
-### Напишите функцию, на вход которой подается какое-то изначальное неизвестное количество аргументов, над которыми будет производится арифметические действия. Для выполнения задания необходимо использовать кортеж “*args”. На скриншоте ниже приведен пример такой программы с комментариями. Для закрепления понимания работы с кортежами настоятельно рекомендуем поменять аргументы вызова функции, вручную посчитать результат, только потом запустить программу с новыми значениями и проверить себя, насколько вы поняли данный аспект программирования.
+### Напишите функцию, на вход которой подается какое-то изначальное неизвестное количество аргументов, над которыми будет производится арифметические действия. Для выполнения задания необходимо использовать кортеж “*args”. Для закрепления понимания работы с кортежами настоятельно рекомендуем поменять аргументы вызова функции, вручную посчитать результат, только потом запустить программу с новыми значениями и проверить себя, насколько вы поняли данный аспект программирования.
 
 ```python
-numbers = [1, 2, 3, 6, 8, 9, 15, 16, 73, 321, 322]
-value = int(input('Введите значение переменной: '))
-if value in numbers:
-    if value % 2 == 0:
-        print('Переменная четная и есть в массиве numbers')
-    else:
-        print('Переменная нечетная и есть в массиве numbers')
-else:
-    print(f"Переменной нет в массиве numbers и она равна {value}")
+def main(x, *args):
+    one = x
+    two = sum(args)
+    three = float(len(args))
+    print(f"one={one}\ntwo={two}\nthree={three}")
+
+    return x + sum(args) / float(len(args))
+
+if __name__ == '__main__':
+    result = main(10, 0, 1, 2, -1, 0, -1, 1, 2)
+    print(f"\nresult={result}")
+```
+
+#### Пример со своими значениями:
+```python
+def main(x, y, z, *args):
+    one = x
+    two = len(args)
+    three = y
+    four = sum(args)
+    five = z
+    print(f"one = {one}\ntwo = {two}\nthree = {three}\nfour = {four}\nfive = {five}")
+
+    return x + str(two/four) + three + five
+
+if __name__ == '__main__':
+    result = main('We are ', ' times more ', 'effective', 1701, 113, 1.618, 42)
+    print(f"\nresult = {result}")
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L34.png)
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L342.png)
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L343.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L441.png)
+
+#### Пример со своими значениями:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L442.png)
 
 ## Лабораторная работа №5
-### Напишите функцию, которая на вход получает кортеж “**kwargs” и при помощи цикла выводит значения, поступившие в функцию. На скриншоте ниже указаны два варианта вызова функции с “**kwargs” и два варианта работы с данными, поступившими в эту функцию. Комментарии в коде и теоретическая часть помогут вам разобраться в этом нелегком аспекте. Вызовите функцию используя “точку входа”.
+### Напишите функцию, которая на вход получает кортеж “**kwargs” и при помощи цикла выводит значения, поступившие в функцию. Вызовите функцию используя “точку входа”.
 
 ```python
-for i in range(10):
-    print('i = ', i)
-    if i == 0:
-        i += 2
-    if i == 1:
-        continue
-    if i == 2 or i == 3:
-        print('Переменная равна 2 или 3')
-    elif i in [4, 5, 6]:
-        print('Переменная равна 4, 5 или 6')
-    else:
-        break
+def main(**kwargs):
+    for i in kwargs.items():
+        print(i[0], i[1])
+
+    print()
+
+    for key in kwargs:
+        print(f"{key} = {kwargs[key]}")
+
+if __name__ == '__main__':
+    main(x=[1, 2, 3], y=[3, 3, 0], z=[2, 3, 0], q=[3, 3, 0], w=[3, 3, 0])
+    print()
+    main(**{'x': [1, 2, 3], 'y': [3, 3, 0]})
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L35.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L45.png)
 
 ## Лабораторная работа №6
-### ) Напишите две функции. Первая – получает в виде параметра “**kwargs”. Вторая считает среднее арифметическое из значений первой функции. Вызовите первую функцию используя “точку входа” и минимум 4 аргумента.
+### Напишите две функции. Первая – получает в виде параметра “**kwargs”. Вторая считает среднее арифметическое из значений первой функции. Вызовите первую функцию используя “точку входа” и минимум 4 аргумента.
 
 ```python
-string = 'Привет всем изучающим Python!'
-value = input()
-for i in string:
-    if i == value:
-        index = string.find(value)
-        print(f"Буква '{value}' есть в строке под {index} индексом")
-        break
-else:
-    print(f"Буквы '{value}' нет в указанной строке")
+def main(**kwargs):
+    for i, j in kwargs.items():
+        print(f"{i}. Mean = {mean(j)}")
 
+def mean(data):
+    return sum(data)/float(len(data))
+
+if __name__ == '__main__':
+    main(x=[1, 2, 3], y=[3, 3, 0])
+```
+
+#### Пример с 4-мя аргументами:
+```python
+def main(**kwargs):
+    for i, j in kwargs.items():
+        print(f"{i}. Mean = {mean(j)}")
+
+def mean(data):
+    return sum(data)/float(len(data))
+
+if __name__ == '__main__':
+    main(x=[1, 2, 3], y=[3, 3, 0], z=[22, 44, 6], r=[11, 7, 3])
 ```
 
 ### Результат.
-#### Программа выводит первую по индексу подходящую переменную value из строки string:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L36.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L461.png)
+
+#### Пример с 4-мя аргументами:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L462.png)
 
 ## Лабораторная работа №7
 ### Создайте дополнительный файл .py. Напишите в нем любую функцию, которая будет что угодно выводить в консоль, но не вызывайте ее в нем. Откройте файл main.py, импортируйте в него функцию из нового файла и при помощи “точки входа” вызовите эту функцию.
 
-#### Готовая программа:
+#### L471:
 ```python
-value = 100
-for i in range(10, -1, -1):
-    value -= i
-    print(i, value)
+def say_hello():
+    print('Hello students!')
 ```
 
-#### Измененная программа:
+#### L472:
 ```python
-string = 'КОТ'
-index = len(string) - 1
-for i in range(index, -1, -1):
-    word = string[index]
-    print(word, index)
-    index -= 1
+from L471 import say_hello
+
+if __name__ == '__main__':
+    say_hello()
 ```
 
 ### Результат.
 #### Готовая программа:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L37.png)
-#### Измененная программа, выводит буквы строки в обратном порядке с соотвественным индексом:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L372.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L47.png)
 
 ## Лабораторная работа №8
 ### Напишите программу, которая будет выводить корень, синус, косинус полученного от пользователя числа.
