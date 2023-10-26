@@ -206,77 +206,120 @@ if __name__ == '__main__':
 ```
 
 ### Результат.
-#### Готовая программа:
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L47.png)
 
 ## Лабораторная работа №8
 ### Напишите программу, которая будет выводить корень, синус, косинус полученного от пользователя числа.
 
-#### Бесконечный цикл:
+#### Импорт модуля math целиком:
 ```python
-value = 0
-while value < 100:
-    if value == 0:
-        value += 10
-    elif value // 5 > 2:
-        value *= 5
-    else:
-        value -= 5
-    print(value)
+import math
+
+def main():
+    value = int(input('Введите значение: '))
+    print(math.sqrt(value))
+    print(math.sin(value))
+    print(math.cos(value))
+
+if __name__ == '__main__':
+    main()
 ```
 
-#### Исправленный вариант:
+#### Импорт трех необходимых функций из модуля math:
 ```python
-value = 0
-while value < 100:
-    if value == 0:
-        value += 10
-    elif value // 5 > 1:
-        value *= 5
-    else:
-        value -= 5
-    print(value)
+from math import sqrt, sin, cos
+
+def main():
+    value = int(input('Введите значение: '))
+    print(sqrt(value))
+    print(sin(value))
+    print(cos(value))
+
+if __name__ == '__main__':
+    main()
+```
+
+#### Импорт модуля math целиком (укороченный синтаксис):
+```python
+from math import *
+
+def main():
+    value = int(input('Введите значение: '))
+    print(sqrt(value))
+    print(sin(value))
+    print(cos(value))
+
+if __name__ == '__main__':
+    main()
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L381.png)
-#### Если поменять значения в 5 строке с 2 на 1, то код заработает (поскольку поступающая на вход 10 делится на 5, давая в результате частное 2, в первом случае строгий знак равенства > 2 не позволял циклу пройти второе условие).
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L382.png)
+#### Импорт модуля math целиком:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L481.png)
+
+#### Импорт трех необходимых функций из модуля math:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L482.png)
+
+#### Импорт модуля math целиком (укороченный синтаксис):
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L483.png)
 
 ## Лабораторная работа №9
 ### Напишите программу, которая будет рассчитывать какой день недели будет через n-нное количество дней, которые укажет пользователь.
 
 ```python
-value = 0
-for i in range(10):
-    for j in range(10):
-        if i != j:
-            value += j
-        else:
-            pass
-print(value)
+from datetime import datetime as dt
+from datetime import timedelta as td
+
+def main():
+    print(
+        f"Сегодня {dt.today().date()}. "
+        f"День недели - {dt.today().isoweekday()}"
+    )
+    n = int(input('Введите количество дней: '))
+    today = dt.today()
+    result = today + td(days=n)
+    print (
+        f"Через {n} дней будет {result.date()}. "
+        f"День недели - {result.isoweekday()}"
+    )
+
+if __name__ == '__main__':
+    main()
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L39.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L49.png)
 
 ## Лабораторная работа №10
 ### Напишите программу с использованием глобальных переменных, которая будет считать площадь треугольника или прямоугольника в зависимости от того, что выберет пользователь. Получение всей необходимой информации реализовать через input(), а подсчет площадей выполнить при помощи функций. Результатом программы будет число, равное площади, необходимой фигуры.
 
 ```python
-even_array = [2, 4, 6, 8, 9]
-flag = False
-for value in even_array:
-    if value % 2 == 1:
-        flag = True
-if flag is True:
-    print('В массиве есть нечетное число')
-else:
-    print('В массиве все числа четные')
+global result
+
+def rectangle():
+    a = float(input("Ширина: "))
+    b = float(input("Высота: "))
+    global result
+    result = a * b
+
+def triangle():
+    a = float(input("Основание: "))
+    b = float(input("Высота: "))
+    global result
+    result = 0.5 * a * b
+
+figure = input("1 - прямоугольник, 2 - треугольник: ")
+
+if figure == '1':
+    rectangle()
+elif figure == '2':
+    triangle()
+
+print(f"Площадь: {result}")
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_3/pic/L310.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L410.png)
 
 # Самостоятельные работы
 ## Самостоятельная работа №1
