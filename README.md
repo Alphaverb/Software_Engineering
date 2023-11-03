@@ -24,244 +24,166 @@
 ### Друзья предложили вам поиграть в игру “найди отличия и убери повторения (версия для программистов)”. Суть игры состоит в том, что на вход программы поступает два множества, а ваша задача вывести все элементы первого, которых нет во втором. А вы как раз недавно прошли множества и знаете их возможности, поэтому это не составит для вас труда. P.S. Посмотрите что происходит с повторяющимися значениями в множествах, это достаточно интересно.
 
 ```python
-def main():
-    print(2 + 2)
-    
-if __name__ == '__main__':
-    main()
+set_1 = {'White', 'Black', 'Red', 'Pink'}
+set_2 = {'Red', 'Green', 'Blue', 'Red'}
+
+print(set_1 - set_2)
+```
+
+#### Пример с разными видами повторений:
+```python
+set_1 = {'White', 'Black', 'Red', 'Pink'}
+set_2 = {'Red', 'Green', 'Blue', 'Red'}
+print('1', set_1 - set_2)
+
+set_1 = {'White', 'Black', 'Red', 'Pink', 'Black', 'White'}
+set_2 = {'Red', 'Green', 'Blue', 'Red'}
+print('2', set_1 - set_2)
+
+set_1 = {'White', 'Black', 'Red', 'Pink', 'Red', 'Red'}
+set_2 = {'Red', 'Green', 'Blue', 'Red'}
+print('3', set_1 - set_2)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L41.png)
+#### Порядок элементов в результирующем множестве может меняться при каждом запуске программы. Это связано с тем, что множества в Python реализованы как хеш-таблицы, которые не сохраняют порядок элементов для оптимизации производительности:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L511.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L512.png)
+
+#### Пример с разными видами повторений:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L513.png)
 
 ## Лабораторная работа №2
 ### Напишите две одинаковые программы, только одна будет использовать set(), а вторая frozenset() и попробуйте к исходному множеству добавить несколько элементов, например, через цикл.
 
+#### set():
 ```python
-def main():
-    return 2 + 2
-
-if __name__ == '__main__':
-    print(main())
+a = set('abcdefg')
+print(a)
+for i in range(1, 5):
+    a.add(i)
+print(a)
 ```
 
-#### Развернутый вид:
+#### frozenset():
 ```python
-def main():
-    result = 2 + 2
-    return result
-
-if __name__ == '__main__':
-    answer = main()
-    print(answer)
+a = frozenset('abcdefg')
+print(a)
+for i in range(1, 5):
+    a.add(i)
+print(a)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L421.png)
+#### set():
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L521.png)
 
-#### Развернутый вид:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L422.png)
+#### frozenset():
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L522.png)
 
 ## Лабораторная работа №3
 ### На вход в программу поступает список (минимальной длиной 2 символа). Напишите программу, которая будет менять первый и последний элемент списка. P.S. В Python есть прикольное свойство, благодаря которому эту задачу можно решить более красиво, использовав всего 2 сточки кода, если интересно можете самостоятельно найти это решение.
 
 ```python
-def main(one, two):
-    result = one + two
-    return result
+def replace(input_list):
+    memory = input_list[0]
+    input_list[0] = input_list[-1]
+    input_list[-1] = memory
 
-for i in range(5):
-    x = 1
-    y = 10
-    answer = main(x, y)
+    return input_list
+
+print(replace([1, 2, 3, 4, 5]))
 ```
 
-#### Аргументы передаются в вызове функции:
+#### 'Красивое' решение. Получено с использованием срезов списка и конкатенации в нужном порядке:
 ```python
-def main(one, two):
-    return one + two
-
-for i in range(5):
-    answer = main(one=1, two=10)
-    print(answer)
+input_list = [1, 2, 3, 4, 5]
+print(input_list[-1:] + input_list[1:-1] + input_list[:1])
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L431.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L531.png)
 
-#### Аргументы передаются в вызове функции:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L432.png)
+#### 'Красивое' решение:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L532.png)
 
 ## Лабораторная работа №4
 ### На вход в программу поступает список (минимальной длиной 10 символов). Напишите программу, которая выводит элементы с индексами от 2 до 6. В программе необходимо использовать “срез”.
 
 ```python
-def main(x, *args):
-    one = x
-    two = sum(args)
-    three = float(len(args))
-    print(f"one={one}\ntwo={two}\nthree={three}")
-
-    return x + sum(args) / float(len(args))
-
-if __name__ == '__main__':
-    result = main(10, 0, 1, 2, -1, 0, -1, 1, 2)
-    print(f"\nresult={result}")
-```
-
-#### Пример со своими значениями:
-```python
-def main(x, y, z, *args):
-    one = x
-    two = len(args)
-    three = y
-    four = sum(args)
-    five = z
-    print(f"one = {one}\ntwo = {two}\nthree = {three}\nfour = {four}\nfive = {five}")
-
-    return x + str(two/four) + three + five
-
-if __name__ == '__main__':
-    result = main('We are ', ' times more ', 'effective', 1701, 113, 1.618, 42)
-    print(f"\nresult = {result}")
+a = [12, 54, 32, 57, 843, 2346, 765, 75, 25, 234, 756, 23]
+print(a[2:6])
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L441.png)
-
-#### Пример со своими значениями:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L442.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L54.png)
 
 ## Лабораторная работа №5
 ### Иван задумался о поиске «бесполезного» числа, полученного из списка. Суть поиска в следующем: он берет произвольный список чисел, находит самое большое из них, а затем делит его на длину списка. Студент пока не придумал, где может пригодиться подобное значение, но ищет у вас помощи в реализации такой функции useless().
 
 ```python
-def main(**kwargs):
-    for i in kwargs.items():
-        print(i[0], i[1])
+def useless(lst):
+    return max(lst) / len(lst)
 
-    print()
-
-    for key in kwargs:
-        print(f"{key} = {kwargs[key]}")
-
-if __name__ == '__main__':
-    main(x=[1, 2, 3], y=[3, 3, 0], z=[2, 3, 0], q=[3, 3, 0], w=[3, 3, 0])
-    print()
-    main(**{'x': [1, 2, 3], 'y': [3, 3, 0]})
+print(useless([3,5,7,3,33]))
+print(useless([-12.5, 54, 77.3, 0, -36, 98.2, -63, 21.7, 47, -89.6]))
+print(useless([-25.8, 86, 12.5, -56, 73.2, 0, 43, -91.5, 65.9, -7]))
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L45.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L55.png)
 
 ## Лабораторная работа №6
 ### Ребята не могут определится каким супергероем они хотят стать. У них есть случайно составленный список супергероев, и вы должны определить кто из ребят будет каким супергероем. Необходимо использовать разделение списков.
 
 ```python
-def main(**kwargs):
-    for i, j in kwargs.items():
-        print(f"{i}. Mean = {mean(j)}")
+superheroes = ['superman', 'spiderman', 'batman']
 
-def mean(data):
-    return sum(data)/float(len(data))
+nikolay, vasiliy, ivan = superheroes
 
-if __name__ == '__main__':
-    main(x=[1, 2, 3], y=[3, 3, 0])
-```
-
-#### Пример с 4-мя аргументами:
-```python
-def main(**kwargs):
-    for i, j in kwargs.items():
-        print(f"{i}. Mean = {mean(j)}")
-
-def mean(data):
-    return sum(data)/float(len(data))
-
-if __name__ == '__main__':
-    main(x=[1, 2, 3], y=[3, 3, 0], z=[22, 44, 6], r=[11, 7, 3])
+print('Николай - ', nikolay)
+print('Василий - ', vasiliy)
+print('Иван - ', ivan)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L461.png)
-
-#### Пример с 4-мя аргументами:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L462.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L56.png)
 
 ## Лабораторная работа №7
 ### Вовочка, насмотревшись передачи “Слабое звено” решил написать программу, которая также будет находить самое слабое звено (минимальный элемент) и удалять его, только делать он это хочет не с людьми, а со списком. Помогите Вовочке с реализацией программы. Подсказка: для этого вам необходимо отсортировать список и удалить значение при помощи pop().
 
-#### L471:
 ```python
-def say_hello():
-    print('Hello students!')
-```
-
-#### L472:
-```python
-from L471 import say_hello
-
-if __name__ == '__main__':
-    say_hello()
+a = [-25.8, 86, 12.5, -56, 73.2, 0, 43, -91.5, 65.9, -7]
+a.sort()
+print('Отсортированный список:\n', a)
+a.pop(0)
+print('Отсортированный список без наименьшего элемента:\n', a)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L47.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L57.png)
 
 ## Лабораторная работа №8
 ### Михаил решил создать большой n-мерный список, для этого он случайным образом создал несколько списков, состоящих минимум из 3, а максимум из 10 элементов и поместил их в один большой список. Он также как и Иван не знает зачем ему это сейчас нужно, но надеется на то, что это пригодится ему в будущем.
 
 #### Импорт модуля math целиком:
 ```python
-import math
+from random import randint
 
-def main():
-    value = int(input('Введите значение: '))
-    print(math.sqrt(value))
-    print(math.sin(value))
-    print(math.cos(value))
+def list_maker():
+    a = [randint(1,100)] * randint(3,10)
+    return a
 
 if __name__ == '__main__':
-    main()
-```
+    result = []
+    for i in range(randint(1,5)):
+        result.append(list_maker())
 
-#### Импорт трех необходимых функций из модуля math:
-```python
-from math import sqrt, sin, cos
-
-def main():
-    value = int(input('Введите значение: '))
-    print(sqrt(value))
-    print(sin(value))
-    print(cos(value))
-
-if __name__ == '__main__':
-    main()
-```
-
-#### Импорт модуля math целиком (укороченный синтаксис):
-```python
-from math import *
-
-def main():
-    value = int(input('Введите значение: '))
-    print(sqrt(value))
-    print(sin(value))
-    print(cos(value))
-
-if __name__ == '__main__':
-    main()
+    print(result)
 ```
 
 ### Результат.
-#### Импорт модуля math целиком:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L481.png)
-
-#### Импорт трех необходимых функций из модуля math:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L482.png)
-
-#### Импорт модуля math целиком (укороченный синтаксис):
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L483.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L58.png)
 
 ## Лабораторная работа №9
 ### Вы работаете в ресторане и отвечает за статистику покупок, ваша задача сравнить между собой заказы покупателей, которые указаны в разном порядке. Реализуйте функцию superset(), которая принимает 2 множества. Результат работы функции: вывод в консоль одного из сообщений в зависимости от ситуации:
@@ -270,59 +192,36 @@ if __name__ == '__main__':
 ### 3 – «Множества равны»
 
 ```python
-from datetime import datetime as dt
-from datetime import timedelta as td
-
-def main():
-    print(
-        f"Сегодня {dt.today().date()}. "
-        f"День недели - {dt.today().isoweekday()}"
-    )
-    n = int(input('Введите количество дней: '))
-    today = dt.today()
-    result = today + td(days=n)
-    print (
-        f"Через {n} дней будет {result.date()}. "
-        f"День недели - {result.isoweekday()}"
-    )
+def superset(set_1, set_2):
+    if set_1 > set_2:
+        print(f'Объект {set_1} является чистым супермножеством')
+    elif set_1 == set_2:
+        print(f'Множества равны')
+    elif set_1 < set_2:
+        print(f'Объект {set_2} является чистым супермножеством')
+    else:
+        print(f'Супермножество не обнаружено')
 
 if __name__ == '__main__':
-    main()
+    superset({1, 8, 3, 5}, {3, 5})
+    superset({1, 8, 3, 5}, {5, 3, 8, 1})
+    superset({3, 5}, {5, 3, 8, 1})
+    superset({90, 100}, {3, 5})
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L49.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L59.png)
 
 ## Лабораторная работа №10
 ### Предположим, что вам нужно разобрать стопку бумаг, но нужно начать работу с нижней, “переверните стопку”. Вам дан произвольный список. Представьте его в обратном порядке. Программа должна занимать не более двух строк в редакторе кода.
 
 ```python
-global result
-
-def rectangle():
-    a = float(input("Ширина: "))
-    b = float(input("Высота: "))
-    global result
-    result = a * b
-
-def triangle():
-    a = float(input("Основание: "))
-    b = float(input("Высота: "))
-    global result
-    result = 0.5 * a * b
-
-figure = input("1 - прямоугольник, 2 - треугольник: ")
-
-if figure == '1':
-    rectangle()
-elif figure == '2':
-    triangle()
-
-print(f"Площадь: {result}")
+my_list = [2, 5, 8, 3]
+print(my_list[::-1])
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/L410.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L510.png)
 
 # Самостоятельные работы
 ## Самостоятельная работа №1
