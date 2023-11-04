@@ -287,7 +287,6 @@ print("Список результатов по возрастанию:", sorted
 ```
 
 ### Результат.
-#### Проигрыш:
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/S52.png)
 
 ## Выводы
@@ -306,28 +305,37 @@ print("Список результатов по возрастанию:", sorted
 ### three = [4, 21, 37, 56, 84]
 
 ```python
-from datetime import *
-from time import *
+from math import sqrt
 
-def time():
-    start_time = datetime.now()
-    while datetime.now() - start_time < timedelta(seconds=5):
-        current_time = datetime.now()
-        print(current_time.strftime('%X'))
-        sleep(1)
+one = [12, 25, 3, 48, 71]
+two = [5, 18, 40, 62, 98]
+three = [4, 21, 37, 56, 84]
 
-if __name__ == "__main__":
-    time()
+def min_triangle(list):
+    min_element = min(list)
+    return min_element
+
+def max_triangle(list):
+    max_element = max(list)
+    return max_element
+
+def triangle_area(a, b, c):
+    s = (a + b + c) / 2
+    area = sqrt(s * (s - a) * (s - b) * (s - c))
+    return area
+
+area_min = triangle_area(min_triangle(one), min_triangle(two), min_triangle(three))
+area_max = triangle_area(max_triangle(one), max_triangle(two), max_triangle(three))
+print("Площадь треугольника из минимальных значений:", area_min, "\nMin:", min_triangle(one), min_triangle(two), min_triangle(three),
+      "\nПлощадь треугольника из максимальных значений:", area_max, "\nMax:", max_triangle(one), max_triangle(two), max_triangle(three))
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/S43.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/S53.png)
 
 ## Выводы
 
-1. Объект timedelta (часть модуля datetime) в Python используется для выполнения манипуляций с датой и временем, представляет собой продолжительность времени.
-2. Метод strftime() (часть модуля datetime) преобразует объект типа datetime в строку. %X обозначает время в формате 'HH:MM:SS'.
-3. Метод Python sleep() (часть модуля time) используется для приостановки (задержки) выполнения текущего потока на заданное количество секунд.
+В Python есть несколько способов передачи списка в функцию. Один из самых простых способов – это передача списка как аргумента функции. Для этого нужно указать имя списка в круглых скобках при определении функции и использовать это имя внутри функции для обращения к списку.
 
 ## Самостоятельная работа №4
 ### Никто не любит получать плохие оценки, поэтому Борис решил это исправить. Допустим, что все оценки студента за семестр хранятся в одном списке. Ваша задача удалить из этого списка все двойки, а все тройки заменить на четверки.
@@ -337,56 +345,26 @@ if __name__ == "__main__":
 ### [5, 4, 3, 3, 4, 3, 3, 5, 5, 3, 3, 3, 3, 4, 4]
 ### Результатом выполнения задачи будет: листинг кода, и вывод в консоль, в котором будут три обновленных массива
 
-#### Реализация с вводом аргументов в коде программы:
 ```python
-def average(*args):
-    if len(args) == 0:
-        print('Вы не ввели число!')
-        exit()
-    print(args)
-    result = sum(args) / len(args)
-    return result
+mark_list1 = [2, 3, 4, 5, 3, 4, 5, 2, 2, 5, 3, 4, 3, 5, 4]
+mark_list2 = [4, 2, 3, 5, 3, 5, 4, 2, 2, 5, 4, 3, 5, 3, 4]
+mark_list3 = [5, 4, 3, 3, 4, 3, 3, 5, 5, 3, 3, 3, 3, 4, 4]
 
-if __name__ == "__main__":
-    result = average(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
-    print(f"Среднее арифметическое: {result}")
+def good_marks(list):
+    updated_mark_list = [4 if mark == 3 else mark for mark in list if mark != 2]
+    return updated_mark_list
+
+print("Обновленный список оценок для первого варианта:", good_marks(mark_list1),
+      "\nОбновленный список оценок для второго варианта:", good_marks(mark_list2),
+      "\nОбновленный список оценок для третьего варианта:", good_marks(mark_list3))
 ```
-
-#### Реализация с вводом аргументов с консоли:
-```python
-def average(*args):
-    if len(args) == 0:
-        print('Вы не ввели число!')
-        exit()
-    result = sum(args) / len(args)
-    return result
-
-if __name__ == "__main__":
-    num = input("Введите числа через пробел: ").split()
-    arguments = [float(x) for x in num]
-    result = average(*arguments)
-    print(f"Среднее арифметическое: {result}")
-```
-
 
 ### Результат.
-#### Реализация с вводом аргументов в коде программы:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/S441.png)
-
-#### Реализация с вводом аргументов с консоли:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_4/pic/S442.png)
-
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/S54.png)
 
 ## Выводы
 
-1. *args используется для передачи произвольного числа неименованных аргументов функции. При этом args - общепринятое название, и, в общем-то, не важно, какое будет название у аргумента, важен сам оператор - звёздочка. 
-2.  Метод split() принимает строку и возвращает список подстрок (т.е. сканирует строку и разделяет ее в случае нахождения разделителя). Пробел — разделитель по умолчанию.
-3.  [float(x) for x in num] - генератор списка, преобразует введенные значения в нужный тип данных (в данном случае в вещественный). В расширенном виде запись выглядела бы так:
-   
-   ```python 
-       for i in range(len(num)):
-        num[i] = float(num[i])
-   ```
+Функция good_marks принимает исходный список с отметками и возвращает исправленный список, полученный с помощью генератора списков (позволяет создавать новые списки на основе существующих списков или других итерируемых объектов). В новом списке все оценки 3 заменены на 4 (иначе оценка остается без изменения), а оценки 2 исключены из рассмотрения (благодаря условию if grade != 2). В генераторе списка можно использовать любое имя переменной вместо mark (это временная переменная, которая представляет текущий элемент из списка на каждой итерации цикла).
 
 ## Самостоятельная работа №5
 ### Вам предоставлены списки натуральных чисел, из них необходимо сформировать множества. При этом следует соблюдать это правило: если какое-либо число повторяется, то преобразовать его в строку по следующему образцу: например, если число 4 повторяется 3 раза, то в множестве будет следующая запись: само число 4, строка «44», строка «444».
