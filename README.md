@@ -19,114 +19,93 @@
 ### В школе, где вы учились, узнали, что вы крутой программист и попросили написать программу для учителей, которая будет при вводе кабинета писать для него ключ доступа и статус, занят кабинет или нет. При написании программы необходимо использовать словарь (dict), который на вход получает номер кабинета, а выводит необходимую информацию. Если кабинета, который вы ввели нет в словаре, то в консоль в виде значения ключа нужно вывести “None” и виде статуса вывести “False”. По большому счету написав данную программу мы с вами научились заменять иногда громоздкую конструкцию if/elif/else. Поскольку здесь функционал словаря полностью повторяет функционал условия, но при этом у использования словарей в более сложных программах есть намного больше возможностей реализации.
 
 ```python
-set_1 = {'White', 'Black', 'Red', 'Pink'}
-set_2 = {'Red', 'Green', 'Blue', 'Red'}
+request = int(input('Введите номер кабинета: '))
 
-print(set_1 - set_2)
-```
+dictionary = {
+    101: {'key': 1234, 'access': True},
+    102: {'key': 1337, 'access': True},
+    103: {'key': 8943, 'access': True},
+    104: {'key': 5555, 'access': False},
+    None: {'key': None, 'access': False},
+}
 
-#### Пример с разными видами повторений:
-```python
-set_1 = {'White', 'Black', 'Red', 'Pink'}
-set_2 = {'Red', 'Green', 'Blue', 'Red'}
-print('1', set_1 - set_2)
-
-set_1 = {'White', 'Black', 'Red', 'Pink', 'Black', 'White'}
-set_2 = {'Red', 'Green', 'Blue', 'Red'}
-print('2', set_1 - set_2)
-
-set_1 = {'White', 'Black', 'Red', 'Pink', 'Red', 'Red'}
-set_2 = {'Red', 'Green', 'Blue', 'Red'}
-print('3', set_1 - set_2)
+response = dictionary.get(request)
+if not response:
+    response = dictionary[None]
+key = response.get('key')
+access = response.get('access')
+print(key, access)
 ```
 
 ### Результат.
-#### Порядок элементов в результирующем множестве может меняться при каждом запуске программы. Это связано с тем, что множества в Python реализованы как хеш-таблицы, которые не сохраняют порядок элементов для оптимизации производительности:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L511.png)
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L512.png)
-
-#### Пример с разными видами повторений:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L513.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_6/pic/L61.png)
 
 ## Лабораторная работа №2
 ### Алексей решил создать самый большой словарь в мире. Для этого он придумал функцию dict_maker (**kwargs), которая принимает неограниченное количество параметров «ключ: значение» и обновляет созданный им словарь my_dict, состоящий всего из одного элемента «first» со значением «so easy». Помогите Алексею создать данную функцию. Ниже на скриншоте мы использовали встроенный модуль pprint, который выводит большие объемы информации более понятно для восприятия человеческим глазом. Иногда очень удобно использовать данную возможность Python.
 
-#### set():
 ```python
-a = set('abcdefg')
-print(a)
-for i in range(1, 5):
-    a.add(i)
-print(a)
-```
+from pprint import pprint
 
-#### frozenset():
-```python
-a = frozenset('abcdefg')
-print(a)
-for i in range(1, 5):
-    a.add(i)
-print(a)
+my_dict = {'first': 'so easy'}
+
+def dict_maker(**kwargs):
+    my_dict.update(**kwargs)
+
+dict_maker(a1=1, a2=20, a3=54, a4=13)
+dict_maker(name='Михаил', age=31, weight=70, eyes_color='blue')
+pprint(my_dict)
 ```
 
 ### Результат.
-#### set():
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L521.png)
-
-#### frozenset():
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L522.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_6/pic/L62.png)
 
 ## Лабораторная работа №3
 ### Для решения некоторых задач бывает необходимо разложить строку на отдельные символы. Мы знаем что это можно сделать при помощи split(), у которого более гибкая настройка для разделения для этого, но если нам нужно посимвольно разделить строку без всяких условий, то для этого мы можем использовать кортежи (tuple). Для этого напишем любую строку, которую будем делить и “обвернем” ее в tuple и дальше мы можем как нам угодно с ней работать, например, сделать ее списком (тогда получится полный аналог split()) или же работать с ним дальше, как с кортежем.
 
 ```python
-def replace(input_list):
-    memory = input_list[0]
-    input_list[0] = input_list[-1]
-    input_list[-1] = memory
-
-    return input_list
-
-print(replace([1, 2, 3, 4, 5]))
-```
-
-#### 'Красивое' решение. Получено с использованием срезов списка и конкатенации в нужном порядке:
-```python
-input_list = [1, 2, 3, 4, 5]
-print(input_list[-1:] + input_list[1:-1] + input_list[:1])
+input_string = 'HelloWorld'
+result = tuple(input_string)
+print(result)
+print(list(result))
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L531.png)
-
-#### 'Красивое' решение:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L532.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_6/pic/L63.png)
 
 ## Лабораторная работа №4
 ### Вовочка решил написать крутую функцию, которая будет писать имя, возраст и место работы, но при этом на вход этой функции будет поступать кортеж. Помогите Вовочке написать эту программу.
 
 ```python
-a = [12, 54, 32, 57, 843, 2346, 765, 75, 25, 234, 756, 23]
-print(a[2:6])
+def personal_info(name, age, company = 'unnamed'):
+    print(f'Имя: {name} Возраст: {age} Компания: {company}')
+
+tom = ('Григорий', 22)
+personal_info(*tom)
+
+bob = ('Георгий', 41, 'Yandex')
+personal_info(*bob)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L54.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_6/pic/L64.png)
 
 ## Лабораторная работа №5
 ### Для сопровождения первых лиц государства X нужен кортеж, но никто не может определиться с порядком машин, поэтому вам нужно написать функцию, которая будет сортировать кортеж, состоящий из целых чисел по возрастанию, и возвращает его. Если хотя бы один элемент не является целым числом, то функция возвращает исходный кортеж.
 
 ```python
-def useless(lst):
-    return max(lst) / len(lst)
+def tuple_sort(tpl):
+    for elm in tpl:
+        if not isinstance(elm, int):
+            return tpl
+    return tuple(sorted(tpl))
 
-print(useless([3,5,7,3,33]))
-print(useless([-12.5, 54, 77.3, 0, -36, 98.2, -63, 21.7, 47, -89.6]))
-print(useless([-25.8, 86, 12.5, -56, 73.2, 0, 43, -91.5, 65.9, -7]))
+if __name__ == '__main__':
+    print(tuple_sort((5, 5, 3, 1, 9)))
+    print(tuple_sort((5, 5, 2.1, '1', 9)))
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L55.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_6/pic/L65.png)
 
 # Самостоятельные работы
 ## Самостоятельная работа №1
