@@ -23,141 +23,80 @@
 ## Лабораторная работа №1
 ### Составьте текстовый файл и положите его в одну директорию с программой на Python. Текстовый файл должен состоять минимум из двух строк.
 
-```python
-set_1 = {'White', 'Black', 'Red', 'Pink'}
-set_2 = {'Red', 'Green', 'Blue', 'Red'}
-
-print(set_1 - set_2)
-```
-
-#### Пример с разными видами повторений:
-```python
-set_1 = {'White', 'Black', 'Red', 'Pink'}
-set_2 = {'Red', 'Green', 'Blue', 'Red'}
-print('1', set_1 - set_2)
-
-set_1 = {'White', 'Black', 'Red', 'Pink', 'Black', 'White'}
-set_2 = {'Red', 'Green', 'Blue', 'Red'}
-print('2', set_1 - set_2)
-
-set_1 = {'White', 'Black', 'Red', 'Pink', 'Red', 'Red'}
-set_2 = {'Red', 'Green', 'Blue', 'Red'}
-print('3', set_1 - set_2)
-```
-
 ### Результат.
-#### Порядок элементов в результирующем множестве может меняться при каждом запуске программы. Это связано с тем, что множества в Python реализованы как хеш-таблицы, которые не сохраняют порядок элементов для оптимизации производительности:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L511.png)
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L512.png)
-
-#### Пример с разными видами повторений:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L513.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L71.png)
 
 ## Лабораторная работа №2
 ### Напишите программу, которая выведет только первую строку из вашего файла, при этом используйте конструкцию open()/close().
 
-#### set():
 ```python
-a = set('abcdefg')
-print(a)
-for i in range(1, 5):
-    a.add(i)
-print(a)
-```
-
-#### frozenset():
-```python
-a = frozenset('abcdefg')
-print(a)
-for i in range(1, 5):
-    a.add(i)
-print(a)
+f = open('input.txt', 'r')
+print(f.readline())
+f.close()
 ```
 
 ### Результат.
-#### set():
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L521.png)
-
-#### frozenset():
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L522.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L72.png)
 
 ## Лабораторная работа №3
 ### Напишите программу, которая выведет все строки из вашего файла в массиве, при этом используйте конструкцию open()/close().
 
 ```python
-def replace(input_list):
-    memory = input_list[0]
-    input_list[0] = input_list[-1]
-    input_list[-1] = memory
-
-    return input_list
-
-print(replace([1, 2, 3, 4, 5]))
-```
-
-#### 'Красивое' решение. Получено с использованием срезов списка и конкатенации в нужном порядке:
-```python
-input_list = [1, 2, 3, 4, 5]
-print(input_list[-1:] + input_list[1:-1] + input_list[:1])
+f = open('input.txt', 'r')
+print(f.readlines())
+f.close()
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L531.png)
-
-#### 'Красивое' решение:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L532.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L73.png)
 
 ## Лабораторная работа №4
 ### Напишите программу, которая выведет все строки из вашего файла в массиве, при этом используйте конструкцию with open().
 
 ```python
-a = [12, 54, 32, 57, 843, 2346, 765, 75, 25, 234, 756, 23]
-print(a[2:6])
+with open('input.txt') as f:
+    print(f.readlines())
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L54.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L74.png)
 
 ## Лабораторная работа №5
 ### Напишите программу, которая выведет каждую строку из вашего файла отдельно, при этом используйте конструкцию with open().
 
 ```python
-def useless(lst):
-    return max(lst) / len(lst)
-
-print(useless([3,5,7,3,33]))
-print(useless([-12.5, 54, 77.3, 0, -36, 98.2, -63, 21.7, 47, -89.6]))
-print(useless([-25.8, 86, 12.5, -56, 73.2, 0, 43, -91.5, 65.9, -7]))
+with open('input.txt') as f:
+    for line in f:
+        print(line)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L55.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L75.png)
 
 ## Лабораторная работа №6
 ### Напишите программу, которая будет добавлять новую строку в ваш файл, а потом выведет полученный файл в консоль. Вывод можно осуществлять любым способом. Обязательно проверьте сам файл, чтобы изменения в нем тоже отображались.
 
 ```python
-superheroes = ['superman', 'spiderman', 'batman']
+with open('input.txt', 'a+') as f:
+    f.write('\nIm additional line')
 
-nikolay, vasiliy, ivan = superheroes
-
-print('Николай - ', nikolay)
-print('Василий - ', vasiliy)
-print('Иван - ', ivan)
+with open('input.txt', 'r') as f:
+    result = f.readlines()
+    print(result)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L56.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L76.png)
 
 ## Лабораторная работа №7
 ### Напишите программу, которая перепишет всю информацию, которая была у вас в файле до этого, например напишет любые данные из произвольно вами составленного списка. Также не забудьте проверить, что измененная вами информация сохранилась в файле.
 
 ```python
-a = [-25.8, 86, 12.5, -56, 73.2, 0, 43, -91.5, 65.9, -7]
-a.sort()
-print('Отсортированный список:\n', a)
-a.pop(0)
-print('Отсортированный список без наименьшего элемента:\n', a)
+lines = ['one', 'two', 'three']
+with open('input.txt', 'w') as f:
+    for line in lines:
+        f.write('\nCycle run ' + line)
+    print('Done!')
 ```
 
 ### Результат.
