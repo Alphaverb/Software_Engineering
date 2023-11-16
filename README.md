@@ -100,29 +100,31 @@ with open('input.txt', 'w') as f:
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L57.png)
+#### До:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L771.png)
+
+#### После:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L772.png)
 
 ## Лабораторная работа №8
 ### Выберите любую папку на своем компьютере, имеющую вложенные директории. Выведите на печать в терминал ее содержимое, как и всех подкаталогов при помощи функции print_docs(directory).
 
-#### Импорт модуля math целиком:
 ```python
-from random import randint
+import os
 
-def list_maker():
-    a = [randint(1,100)] * randint(3,10)
-    return a
+def print_docs(directory):
+    all_files = os.walk(directory)
+    for catalog in all_files:
+        print(f'Папка {catalog[0]} содержит:')
+        print(f'Директории: {", ".join([folder for folder in catalog[1]])}')
+        print(f'Файлы: {", ".join([file for file in catalog[2]])}')
+        print('-' * 40)
 
-if __name__ == '__main__':
-    result = []
-    for i in range(randint(1,5)):
-        result.append(list_maker())
-
-    print(result)
+print_docs('/Users/Alphaverb/Desktop/Учеба/Ресурсы/Скрины')
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L58.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L78.png)
 
 ## Лабораторная работа №9
 ### Документ «input.txt» содержит следующий текст:
@@ -136,28 +138,29 @@ if __name__ == '__main__':
 ### С днем рождения!
 ### Удача!
 ### Я тебя люблю.
-### Требуется реализовать функцию, которая выводит слово, имеющее максимальную длину (или список слов, если таковых несколько). Проверьте работоспособность программы на своем наборе данных
+### Требуется реализовать функцию, которая выводит слово, имеющее максимальную длину (или список слов, если таковых несколько). Проверьте работоспособность программы на своем наборе данных.
 
 ```python
-def superset(set_1, set_2):
-    if set_1 > set_2:
-        print(f'Объект {set_1} является чистым супермножеством')
-    elif set_1 == set_2:
-        print(f'Множества равны')
-    elif set_1 < set_2:
-        print(f'Объект {set_2} является чистым супермножеством')
-    else:
-        print(f'Супермножество не обнаружено')
+def longest_words(file):
+    with open(file, encoding='utf-8') as f:
+        words = f.read().split()
+        max_length = len(max(words, key=len))
+        for word in words:
+            if len(word) == max_length:
+                sought_words = word
 
-if __name__ == '__main__':
-    superset({1, 8, 3, 5}, {3, 5})
-    superset({1, 8, 3, 5}, {5, 3, 8, 1})
-    superset({3, 5}, {5, 3, 8, 1})
-    superset({90, 100}, {3, 5})
+        if len(sought_words) == 1:
+            return sought_words[0]
+        return sought_words
+
+print(longest_words('input.txt'))
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L59.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L791.png)
+
+### Свой пример:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L792.png)
 
 ## Лабораторная работа №10
 ### Требуется создать csv-файл «rows_300.csv» со следующими столбцами:
@@ -167,12 +170,22 @@ if __name__ == '__main__':
 ### Для наглядности на каждой итерации цикла искусственно приостанавливайте скрипт на 0,01 секунды.
 
 ```python
-my_list = [2, 5, 8, 3]
-print(my_list[::-1])
+import csv
+import datetime
+import time
+
+with open('rows_300.csv', 'w', encoding='utf-8', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerow(['№', 'Секунда ', 'Микросекунда'])
+    for line in range(1, 301):
+        writer.writerow([line, datetime.datetime.now().second,
+                        datetime.datetime.now().microsecond])
+        time.sleep(0.01)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/L510.png)
+#### Использована библиотека ExcelReader:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L710.png)
 
 # Самостоятельные работы
 ## Самостоятельная работа №1
