@@ -416,25 +416,41 @@ print(f"Input file contains:\n{letters} letters\n{words} words\n{lines} lines")
 ### ****** ** awesome!!!!
 
 ```python
-mark_list1 = [2, 3, 4, 5, 3, 4, 5, 2, 2, 5, 3, 4, 3, 5, 4]
-mark_list2 = [4, 2, 3, 5, 3, 5, 4, 2, 2, 5, 4, 3, 5, 3, 4]
-mark_list3 = [5, 4, 3, 3, 4, 3, 3, 5, 5, 3, 3, 3, 3, 4, 4]
+def censor_text(text, banned_words):
+    for word in banned_words:
+        block = "*" * len(word)
+        text = text.replace(word, block)
+    return text
 
-def good_marks(list):
-    updated_mark_list = [4 if mark == 3 else mark for mark in list if mark != 2]
-    return updated_mark_list
+with open('input.txt', encoding='utf-8') as f:
+    data = f.read()
+    banned_words = data.split()
+    text = ("Hello, world! Python IS the programming language of thE future. My\nEMAIL is....\nPYTHON is awesome!!!!")
+    text_low = text.lower()
 
-print("Обновленный список оценок для первого варианта:", good_marks(mark_list1),
-      "\nОбновленный список оценок для второго варианта:", good_marks(mark_list2),
-      "\nОбновленный список оценок для третьего варианта:", good_marks(mark_list3))
+censored_text = censor_text(text_low, banned_words)
+
+index = 0
+result = ''
+
+for letter in censored_text:
+    if letter == '*':
+        result += letter
+        index += 1
+    else:
+        result += text[index]
+        index += 1
+
+print(result)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/S54.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S74.png)
 
 ## Выводы
 
-Функция good_marks принимает исходный список с отметками и возвращает исправленный список, полученный с помощью генератора списков (позволяет создавать новые списки на основе существующих списков или других итерируемых объектов). В новом списке все оценки 3 заменены на 4 (иначе оценка остается без изменения), а оценки 2 исключены из рассмотрения (благодаря условию if grade != 2). В генераторе списка можно использовать любое имя переменной вместо mark (это временная переменная, которая представляет текущий элемент из списка на каждой итерации цикла).
+1. Функция censor_text принимает на вход исходный текст в нижнем регистре и список запрещенных слов. Для каждого запрещенного слова вычисляется блок со звездочками, который соответствует длине слова ("*" * len(word)). Затем в полученном тексте все встреченные запрещенные слова заменяются на такие блоки.
+2. Чтобы вернуть исходный регистр некоторым нетронутым словам, пришлось прибегнуть к замене. Проверялась каждая буква (символ) из полученного зацензуренного текста - если это звездочка, то она прибавляется к результирующему тексту, а индекс увеличивается на 1, если это иная буква (символ) то к результату прибавляется буква (символ) исходого текста и индекс снова увеличивается на 1.
 
 ## Самостоятельная работа №5
 ### Самостоятельно придумайте и решите задачу, которая будет взаимодействовать с текстовым файлом.
