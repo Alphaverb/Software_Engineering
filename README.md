@@ -255,21 +255,105 @@ print("Количество:", count)
 ### У вас появилась потребность в ведении книги расходов, посмотрев все существующие варианты вы пришли к выводу что вас ничего не устраивает и нужно все делать самому. Напишите программу для учета расходов. Программа должна позволять вводить информацию о расходах, сохранять ее в файл и выводить существующие данные в консоль. Ввод информации происходит через консоль. Результатом выполнения задачи будет: скриншот файла с учетом расходов, листинг кода, и вывод в консоль, с демонстрацией работоспособности программы.
 
 ```python
-results = [10.2, 14.8, 19.3, 22.7, 12.5, 33.1, 38.9, 21.6, 26.4, 17.1, 30.2, 35.7, 16.9,
-           27.8, 24.5, 16.3, 18.7, 31.9, 12.9, 37.4]
+import csv
 
-sorted_results = sorted(results)
-best = sorted_results[:3]
-worst = sorted_results[-3:]
-begin_with_10 = sorted_results[9:]
-print("Список результатов по возрастанию:", sorted_results,
-      "\nТри лучших результата: ", best,
-      "\nТри худших результата: ", worst,
-      "\nРезультаты, начиная с 10: ", begin_with_10)
+def load_data():
+    with open('expenses.csv', 'r', encoding='utf-8', newline='') as f:
+        reader = csv.DictReader(f)
+        data = list(reader)
+    return data
+
+def save_data(data):
+    fieldnames = ['№', 'Дата', 'Категория', 'Содержание операции', 'Расходы']
+    with open('expenses.csv', 'w', encoding='utf-8', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(data)
+
+def add_expense(data):
+    if data:
+        num = len(data) + 1
+    else:
+        num = 1
+
+    date = input("Введите дату: ")
+    category = input("Введите категорию: ")
+    detail = input("Введите содержание операции: ")
+    spent = input("Введите потраченную сумму: ")
+
+    expense = {'№': num, 'Дата': date, 'Категория':  category, 'Содержание операции':  detail, 'Расходы': spent}
+    return expense
+
+def delete_expense(data, expense_num):
+    for expense in data:
+        if int(expense['№']) == expense_num:
+            data.remove(expense)
+            return True
+    return False
+
+def show_expenses(data):
+    if not data:
+        print("Нет сохраненных расходов.")
+    else:
+        print("Список расходов:")
+        for expense in data:
+            print(f"{expense['№']} | {expense['Дата']}: \n {expense['Категория']} — {expense['Содержание операции']} \n ({expense['Расходы']})")
+
+if __name__ == "__main__":
+    expenses = load_data()
+
+    while True:
+        print("\n1. Добавить расходы")
+        print("2. Удалить расходы")
+        print("3. Показать расходы")
+        print("4. Выход")
+
+        choice = input("\nВыберите действие (1/2/3/4): ")
+
+        if choice == '1':
+            expense = add_expense(expenses)
+            expenses.append(expense)
+            save_data(expenses)
+            print("Расход успешно добавлен.")
+
+        elif choice == '2':
+            show_expenses(expenses)
+            del_num = input("\nВведите номер расхода для удаления: ")
+            if delete_expense(expenses, int(del_num)):
+                save_data(expenses)
+                print("Расход успешно удален.")
+            else:
+                print("Расход с указанным номером не найден.")
+
+        elif choice == '3':
+            show_expenses(expenses)
+
+        elif choice == '4':
+            print("Выход из программы.")
+            break
+
+        else:
+            print("Некорректный выбор. Попробуйте снова.")
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/S52.png)
+#### Добавление расходов:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S721.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S722.png)
+
+#### Удаление расходов:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S723.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S724.png)
+
+#### Показ расходов:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S725.png)
+
+#### Файл csv (без плагина ExcelReader):
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S726.png)
+
+#### Файл csv (c плагином ExcelReader):
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S727.png)
+
 
 ## Выводы
 
