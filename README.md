@@ -377,37 +377,30 @@ if __name__ == "__main__":
 ### 4 lines
 
 ```python
-from math import sqrt
+with open('input.txt', encoding='utf-8') as f:
+    data = f.read()
 
-one = [12, 25, 3, 48, 71]
-two = [5, 18, 40, 62, 98]
-three = [4, 21, 37, 56, 84]
+    excluded = [' ', '\n', '.']
+    count = 0
+    for letter in data:
+        if letter not in excluded:
+            count += 1
+    letters = count
 
-def min_triangle(list):
-    min_element = min(list)
-    return min_element
+    words = len(data.split())
+    lines = len(data.split('\n'))
 
-def max_triangle(list):
-    max_element = max(list)
-    return max_element
-
-def triangle_area(a, b, c):
-    s = (a + b + c) / 2
-    area = sqrt(s * (s - a) * (s - b) * (s - c))
-    return area
-
-area_min = triangle_area(min_triangle(one), min_triangle(two), min_triangle(three))
-area_max = triangle_area(max_triangle(one), max_triangle(two), max_triangle(three))
-print("Площадь треугольника из минимальных значений:", area_min, "\nMin:", min_triangle(one), min_triangle(two), min_triangle(three),
-      "\nПлощадь треугольника из максимальных значений:", area_max, "\nMax:", max_triangle(one), max_triangle(two), max_triangle(three))
+print(f"Input file contains:\n{letters} letters\n{words} words\n{lines} lines")
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/S53.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S73.png)
 
 ## Выводы
 
-В Python есть несколько способов передачи списка в функцию. Один из самых простых способов – это передача списка как аргумента функции. Для этого нужно указать имя списка в круглых скобках при определении функции и использовать это имя внутри функции для обращения к списку.
+1. Чтобы найти количество букв в текстовом файле, необходимо составить список исключенных символов (пробел, перенос на следующую строку, точка) и проверить каждую букву (символ) на отсутствие в нем. Если буква не исключена, то к счетчику прибавляется 1.
+2. Чтобы найти количество слов, данные из текста делятся на слова методом split (по умолчанию разделитель - пробел), а затем вычисляется длина получившегося списка.
+3. Чтобы найти количество строк, нужно использовать метод split с разделителем \n и вычислить длину получившегося списка.
 
 ## Самостоятельная работа №4
 ### Напишите программу, которая получает на вход предложение, выводит его в терминал, заменяя все запрещенные слова звездочками * (количество звездочек равно количеству букв в слове). Запрещенные слова, разделенные символом пробела, хранятся в текстовом файле input.txt. Все слова в этом файле записаны в нижнем регистре. Программа должна заменить запрещенные слова, где бы они ни встречались, даже в середине другого слова. Замена производится независимо от регистра: если файл input.txt содержит запрещенное слово exam, то слова exam, Exam, ExaM, EXAM и exAm должны быть заменены на ****.
