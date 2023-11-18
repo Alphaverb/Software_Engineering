@@ -465,28 +465,37 @@ print(result)
 
 
 ```python
-list_1 = [1, 1, 3, 3, 1]
-list_2 = [5, 5, 5, 5, 5, 5, 5]
-list_3 = [2, 2, 1, 2, 2, 5, 6, 7, 1, 3, 2, 2]
+import random
 
-def generate_set(list):
-    index = 0
-    while index < len(list):
-        num_count = list.count(list[index])
-        if num_count > 1:
-            list[index] = str(list[index]) * num_count
-        index += 1
-    return set(list)
+def generate(words, sentences):
+    new_sentence = []
+    for sentence in sentences:
+        generated = sentence.replace('_', random.choice(words), 1)
+        generated_again = generated.replace('_', random.choice(words), 1)
+        new_sentence.append(generated_again)
+    return new_sentence
 
-print("1-ый список: ", generate_set(list_1),
-      "\n2-ой список: ", generate_set(list_2),
-      "\n3-ий список: ", generate_set(list_3))
+
+with open('input.txt', 'r', encoding='utf-8') as file:
+    words = file.read().split(', ')
+
+sentences = [
+    "Если бы у меня тогда был _, жизнь стала бы чуточку проще.",
+    "Я решил подарить ей на день рождения _. Она была в полном восторге, я уверен!",
+    "Заказал тогда по скидке _, но пришел _. Наверное, это знак."
+    ]
+
+new_sentences = generate(words, sentences)
+
+for sentence in new_sentences:
+    print(sentence)
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_5/pic/S55.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S751.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S752.png)
 
 ## Выводы
 
-Функция generate_set принимает значение исходного множества, затем, начиная с индекса 0 и до последнего индекса (конца списка), она считает количество вхождений числа заданного индекса, и, если количество вхождений больше 1, то число становится строковой переменной и умножается на количество вхождений - после цикл переходит к следующей итерации.
+Функция generate принимает на вход список слов для генерации и список предложений. На основе каждого предложения из списка предложений генерируется новое предложение, которое заменяет символ '_' на случайное слово из списка words. При этом операция замены происходит два раза (сначала для generated, потом для generated_again, каждый раз заменяется только один символ для того, чтобы в предложении с двумя повторами вставленные слова не повторялись).
 
