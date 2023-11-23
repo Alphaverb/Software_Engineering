@@ -158,24 +158,135 @@ my_elecic_car.charge()
 ### Реализуйте инкапсуляцию для класса, созданного в первом задании. Создайте защищенный атрибут производителя и приватный атрибут модели. Вызовите защищенный атрибут и заставьте машину поехать. Напишите комментарии для кода, объясняющие его работу. Результатом выполнения задания будет листинг кода с комментариями и получившийся вывод в консоль.
 
 ```python
-with open('input.txt') as f:
-    print(f.readlines())
+class Car:
+    def __init__(self, make, model):
+        self._make = make
+        self.__model = model
+
+    def drive(self):
+        print(f"Driving the {self._make} {self.__model}")
+
+my_car = Car("Toyota", "Corolla")
+print(my_car._make)
+# print(my_car.__model)
+my_car.drive()
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L74.png)
+
+```python
+class Car:
+    def __init__(self, make, model):
+        self._make = make
+# Защищенный атрибут.
+# Имя начинается с одного нижнего подчеркивания, что обозначает его доступность внутри класса и его подклассов.
+        self.__model = model
+# Приватный атрибут.
+# Имя начинается с двух подчеркиваний. Он доступен только внутри класса.
+
+    def drive(self):
+        print(f"Driving the {self._make} {self.__model}")
+
+my_car = Car("Toyota", "Corolla")
+print(my_car._make)
+# Вывод значения защищенного атрибута _make с использованием print(my_car._make).
+# print(my_car.__model)
+# Вывод значения приватного атрибута __model с использованием print(my_car.__model).
+# Это вызовет ошибку, так как приватные атрибуты не могут быть прямо доступны извне класса.
+my_car.drive()
+```
+
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/L841.png)
+
+### Попытка вызова приватного атрибута (print(my_car.__model)):
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/L842.png)
 
 ## Лабораторная работа №5
 ### Реализуйте полиморфизм создав основной (общий) класс “Shape”, а также еще два класса “Rectangle” и “Circle”. Внутри последних двух классов реализуйте методы для подсчета площади фигуры. После этого создайте массив с фигурами, поместите туда круг и прямоугольник, затем при помощи цикла выведите их площади. Напишите комментарии для кода, объясняющие его работу. Результатом выполнения задания будет листинг кода с комментариями и получившийся вывод в консоль.
 
 ```python
-with open('input.txt') as f:
-    for line in f:
-        print(line)
+class Shape:
+    def area(self):
+        pass
+
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def area(self):
+        return self.width * self.height
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return 3.14 * self.radius * self.radius
+
+circle = Circle(radius=3)
+rectangle = Rectangle(width=4, height=5)
+shapes = [rectangle, circle]
+
+for shape in shapes:
+    print(shape.area())
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L75.png)
+```python
+class Shape:
+# Базовый класс формы, который предоставляет метод area(). 
+    def area(self):
+"""
+Абстрактный метод, так как онне имеет реализации (просто pass).
+Он предполагает, что любой подкласс Shape должен предоставить собственную реализацию метода.
+"""
+        pass
+
+class Rectangle(Shape):
+# Подкласс Shape, представляет собой прямоугольник.
+    def __init__(self, width, height):
+"""
+Конструктор __init__.
+Имеет атрибуты width (ширина) и height (высота).
+"""
+        self.width = width
+        self.height = height
+
+    def area(self):
+"""
+Переопределенный метод нахождения площади.
+"""
+        return self.width * self.height
+
+class Circle(Shape):
+# Подкласс Shape, представляет собой круг.
+    def __init__(self, radius):
+"""
+Конструктор __init__.
+Имеет атрибут radius (радиус).
+"""
+        self.radius = radius
+
+    def area(self):
+"""
+Переопределенный метод нахождения площади.
+"""
+        return 3.14 * self.radius * self.radius
+
+rectangle = Rectangle(width=4, height=5)
+circle = Circle(radius=3)
+# Создание объектов прямоугольника и круга.
+shapes = [rectangle, circle]
+# Добавление объектов в список.
+
+for shape in shapes:
+    print(shape.area())
+# Цикл, который проходится по каждой фигуре в списке shapes.
+# Выводит площадь фигуры с помощью методов area.
+```
+
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/L85.png)
 
 # Самостоятельные работы
 ## Самостоятельная работа №1
