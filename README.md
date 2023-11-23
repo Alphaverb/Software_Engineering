@@ -292,177 +292,58 @@ for shape in shapes:
 ## Самостоятельная работа №1
 ### Самостоятельно создайте класс и его объект. Они должны отличаться, от тех, что указаны в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
 
-#### Подсчет слов с учетом предлогов, союзов и символов:
 ```python
-with open('article.txt', 'r', encoding='utf-8') as f:
-    content = f.read()
-    words = content.split()
-    word_count = {}
-    
-    for word in words:
-        if word in word_count:
-            word_count[word] += 1
-        else:
-            word_count[word] = 1
+class Tank:
+    def __init__(self, model):
+        self.model = model
 
-most_common_word = max(word_count, key=word_count.get)
-count = word_count[most_common_word]
-
-print("Наиболее часто встречающееся слово:", most_common_word)
-print("Количество:", count)
-```
-
-#### Подсчет слов с исключением некоторых предлогов, союзов и символов (можно дополнить):
-```python
-with open('article.txt', 'r', encoding='utf-8') as f:
-    content = f.read()
-    words = content.split()
-    word_count = {}
-    excluded_words = ['и', 'или', 'в', 'на', 'с', 'к', 'от', 'до', 'что', '—']
-
-    for word in words:
-        if word not in excluded_words:
-            if word in word_count:
-                word_count[word] += 1
-            else:
-                word_count[word] = 1
-
-most_common_word = max(word_count, key=word_count.get)
-count = word_count[most_common_word]
-
-print("Наиболее часто встречающееся слово:", most_common_word)
-print("Количество:", count)
-
+kv2 = Tank("КВ-2")
+print(kv2.model)
 ```
 
 ### Результат.
-#### Статья:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S711.png)
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S712.png)
-
-#### Предлоги, союзы и символы учитываются:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S713.png)
-
-#### Предлоги, союзы и символы исключены:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S714.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/S81.png)
 
 ## Выводы
 
-1. Контекстный менеджер with гарантирует правильное закрытие файла после его использования.
-2. Метод split() разбивает строку на части, используя как разделитель какой-то символ (или символы) и возвращает список строк. По умолчанию в качестве разделителя используются пробельные символы (пробелы, табы, перевод строки), но в скобках можно указать любой разделитель. Содержимое файла article.txt разбивается на отдельные слова, результат сохраняется в списке words.
-3. В цикле проверяется, есть ли слово в полученном списке (если не нужно учитывать предлоги, союзы и символы, то перед этим идет проверка на отсутствие слова в списке исключенных слов (excluded_words)), если слово уже встречалось, то к счетчику прибавляется 1, иначе счетчик равен 1. Затем конечным переменным присваивается значение слова, которое повторилось максимальное количество раз и само количество повторений.
  
 ## Самостоятельная работа №2
 ### Самостоятельно создайте атрибуты и методы для ранее созданного класса. Они должны отличаться, от тех, что указаны в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
 
 ```python
-import csv
+class Tank:
+    def __init__(self, model, country, tank_type,
+                 gun_caliber, firing_rate,
+                 weight, engine_power, speed):
+        self.model = model
+        self.country = country
+        self.tank_type = tank_type
+        self.gun_caliber = gun_caliber
+        self.firing_rate = firing_rate
+        self.weight = weight
+        self.engine_power = engine_power
+        self.speed = speed
 
-def load_data():
-    with open('expenses.csv', 'r', encoding='utf-8', newline='') as f:
-        reader = csv.DictReader(f)
-        data = list(reader)
-    return data
+    def shoot(self):
+        print(f"Танк {self.model} ({self.country}) стреляет из орудия калибра {self.gun_caliber} мм")
 
-def save_data(data):
-    fieldnames = ['№', 'Дата', 'Категория', 'Содержание операции', 'Расходы']
-    with open('expenses.csv', 'w', encoding='utf-8', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(data)
+    def shots_per_minute(self, minutes):
+        result = self.firing_rate * minutes
+        return result
 
-def add_expense(data):
-    if data:
-        num = len(data) + 1
-    else:
-        num = 1
-
-    date = input("Введите дату: ")
-    category = input("Введите категорию: ")
-    detail = input("Введите содержание операции: ")
-    spent = input("Введите потраченную сумму: ")
-
-    expense = {'№': num, 'Дата': date, 'Категория':  category, 'Содержание операции':  detail, 'Расходы': spent}
-    return expense
-
-def delete_expense(data, expense_num):
-    for expense in data:
-        if int(expense['№']) == expense_num:
-            data.remove(expense)
-            return True
-    return False
-
-def show_expenses(data):
-    if not data:
-        print("Нет сохраненных расходов.")
-    else:
-        print("Список расходов:")
-        for expense in data:
-            print(f"{expense['№']} | {expense['Дата']}: \n {expense['Категория']} — {expense['Содержание операции']} \n ({expense['Расходы']})")
-
-if __name__ == "__main__":
-    expenses = load_data()
-
-    while True:
-        print("\n1. Добавить расходы")
-        print("2. Удалить расходы")
-        print("3. Показать расходы")
-        print("4. Выход")
-
-        choice = input("\nВыберите действие (1/2/3/4): ")
-
-        if choice == '1':
-            expense = add_expense(expenses)
-            expenses.append(expense)
-            save_data(expenses)
-            print("Расход успешно добавлен.")
-
-        elif choice == '2':
-            show_expenses(expenses)
-            del_num = input("\nВведите номер расхода для удаления: ")
-            if delete_expense(expenses, int(del_num)):
-                save_data(expenses)
-                print("Расход успешно удален.")
-            else:
-                print("Расход с указанным номером не найден.")
-
-        elif choice == '3':
-            show_expenses(expenses)
-
-        elif choice == '4':
-            print("Выход из программы.")
-            break
-
-        else:
-            print("Некорректный выбор. Попробуйте снова.")
+kv2 = Tank("КВ-2","СССР", "Тяжелый",
+           152, 2.5,
+           60.8, 640, 35)
+kv2.shoot()
+minutes = 5
+print(f"Танк {kv2.model} выстрелил {kv2.shots_per_minute(minutes)} раз(а) за {minutes} минут")
 ```
 
 ### Результат.
-#### Добавление расходов:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S721.png)
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S722.png)
-
-#### Удаление расходов:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S723.png)
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S724.png)
-
-#### Показ расходов:
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S725.png)
-
-#### Файл csv (без плагина ExcelReader):
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S726.png)
-
-#### Файл csv (c плагином ExcelReader):
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S727.png)
-
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/S82.png)
 
 ## Выводы
 
-1. Функция load_data() открывает файл для записи расходов (expenses.csv), читает его содержимое с использованием метода DictReader (используется для вывода данных из файла в виде словаря), при этом возвращается список словарей, представляющих данные из файла.
-2. Функция save_data() записывает данные из списка словарей в файл расходов с использованием метода DictWriter (в качестве данных для записи используется словарь, требуется строгое указание параметра fieldnames), сначала записывается заголовок (header) с заданными именами полей (fieldnames), а затем строки данных.
-3. Функция add_expense() запрашивает у пользователя информацию о новом расходе (дату, категорию, содержание операции и саму потраченную сумму), после создает словарь, представляющий новый расход с его порядковым номером (длина len(data) + 1 или 1, если еще не было введено расходов). Возвращает этот словарь.
-4. Функция delete_expense() удаляет расход с указанным номером из списка данных. Возвращает True, если расход был успешно удален, и False, если расход с указанным номером не найден.
-5. Функция show_expenses() выводит список расходов на экран. Если данных нет, выводит сообщение об отсутствии сохраненных расходов.
 
 ## Самостоятельная работа №3
 ### Самостоятельно реализуйте наследование, продолжая работать с ранее созданным классом. Оно должно отличаться, от того, что указано в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
