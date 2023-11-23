@@ -33,9 +33,11 @@ my_car = Car("Toyota","Corolla")
 class Car:
 # Определение класса с именем Car.
     def __init__(self, make, model):
-""" Метод инициализации (конструктор) класса.
+"""
+Метод инициализации (конструктор) класса.
 Метод __init__ вызывается при создании нового объекта этого класса.
-Параметры self, make и model представляют объект, производителя и модель автомобиля соответственно. """
+Параметры self, make и model представляют объект, производителя и модель автомобиля соответственно.
+"""
         self.make = make
 # Эта строка присваивает значение параметра make атрибуту make объекта self, который вызывает этот метод.
         self.model = model
@@ -51,26 +53,106 @@ my_car = Car("Toyota","Corolla")
 ### Дополните код из первого задания, добавив в него атрибуты и методы класса, заставьте машину “поехать”. Напишите комментарии для кода, объясняющие его работу. Результатом выполнения задания будет листинг кода с комментариями и получившийся вывод в консоль.
 
 ```python
-f = open('input.txt', 'r')
-print(f.readline())
-f.close()
+class Car:
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+
+    def drive(self):
+        print(f"Driving the {self.make} {self.model}")
+
+my_car = Car("Toyota","Corolla")
+my_car.drive()
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L72.png)
+```python
+class Car:
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+
+    def drive(self):
+"""
+Метод класса, который выводит сообщение о том, в какой машине едут (использует значения атрибутов make и model).
+"""
+        print(f"Driving the {self.make} {self.model}")
+
+my_car = Car("Toyota","Corolla")
+my_car.drive()
+# Вызов метода drive для объекта my_car.
+# Выводится сообщение о том, в какой машине едут, используя значения атрибутов make (производитель) и model (модель).
+```
+
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/L82.png)
 
 ## Лабораторная работа №3
 ### Создайте новый класс “ElectricCar” с методом “charge” и атрибутом емкость батареи. Реализуйте его наследование от класса, созданного в первом задании. Заставьте машину поехать, а потом заряжаться.
 ### Напишите комментарии для кода, объясняющие его работу. Результатом выполнения задания будет листинг кода с комментариями и получившийся вывод в консоль.
 
 ```python
-f = open('input.txt', 'r')
-print(f.readlines())
-f.close()
+class Car:
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+
+    def drive(self):
+        print(f"Driving the {self.make} {self.model}")
+
+my_car = Car("Toyota","Corolla")
+my_car.drive()
+
+class ElectricCar(Car):
+    def __init__(self, make, model, battery_capacity):
+        super().__init__(make, model)
+        self.battery_capacity = battery_capacity
+
+    def charge(self):
+        print(f"Charging the {self.make} {self.model} with {self.battery_capacity} kWh")
+
+my_elecic_car = ElectricCar("Tesla", "Model S", 75)
+my_elecic_car.drive()
+my_elecic_car.charge()
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/L73.png)
+```python
+class Car:
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+
+    def drive(self):
+        print(f"Driving the {self.make} {self.model}")
+
+my_car = Car("Toyota","Corolla")
+my_car.drive()
+
+class ElectricCar(Car):
+# Определение класса ElectricCar, наследующегося от Car.
+    def __init__(self, make, model, battery_capacity):
+"""
+Конструктор __init__, который вызывает конструктор родительского класса с помощью super().
+Добавляет атрибут battery_capacity (емкость батареи).
+"""
+        super().__init__(make, model)
+        self.battery_capacity = battery_capacity
+
+    def charge(self):
+"""
+Метод charge класса ElectricCar.
+Выводит сообщение о том, что электромобиль определенной марки (make), модели (model) и емкости батареи (battery_capacity) заряжается.
+"""
+        print(f"Charging the {self.make} {self.model} with {self.battery_capacity} kWh")
+
+my_elecic_car = ElectricCar("Tesla", "Model S", 75)
+# Создание экземпляра класса ElectricCar с маркой "Tesla", моделью "Model S" и емкостью батареи 75.
+my_elecic_car.drive()
+my_elecic_car.charge()
+# Вызов методов drive (наследуемый) и charge для объекта my_electric_car.
+```
+
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/L83.png)
 
 ## Лабораторная работа №4
 ### Реализуйте инкапсуляцию для класса, созданного в первом задании. Создайте защищенный атрибут производителя и приватный атрибут модели. Вызовите защищенный атрибут и заставьте машину поехать. Напишите комментарии для кода, объясняющие его работу. Результатом выполнения задания будет листинг кода с комментариями и получившийся вывод в консоль.
