@@ -460,30 +460,53 @@ print(f"Танк {kv2.__model} выстрелил {kv2.shots_per_minute(minutes)
 ### Самостоятельно реализуйте полиморфизм. Он должен отличаться, от того, что указан в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
 
 ```python
-import random
+class Tank:
+    def sound(self):
+        pass
 
-def generate(words, sentences):
-    new_sentence = []
-    for sentence in sentences:
-        generated = sentence.replace('_', random.choice(words), 1)
-        generated_again = generated.replace('_', random.choice(words), 1)
-        new_sentence.append(generated_again)
-    return new_sentence
+class HeavyTank(Tank):
+    def __init__(self, model, country,
+                 gun_caliber, firing_rate,
+                 weight, engine_power, speed):
+        self.model = model
+        self.country = country
+        self.gun_caliber = gun_caliber
+        self.firing_rate = firing_rate
+        self.weight = weight
+        self.engine_power = engine_power
+        self.speed = speed
 
+    def sound(self):
+        return "БрррРрррРррр"
 
-with open('input.txt', 'r', encoding='utf-8') as file:
-    words = file.read().split(', ')
+class LightTank(Tank):
+    def __init__(self, model, country,
+                 gun_caliber, firing_rate,
+                 weight, engine_power, speed,
+                 view_range):
+        self.model = model
+        self.country = country
+        self.gun_caliber = gun_caliber
+        self.firing_rate = firing_rate
+        self.weight = weight
+        self.engine_power = engine_power
+        self.speed = speed
+        self.view_range = view_range
 
-sentences = [
-    "Если бы у меня тогда был _, жизнь стала бы чуточку проще.",
-    "Я решил подарить ей на день рождения _. Она была в полном восторге, я уверен!",
-    "Заказал тогда по скидке _, но пришел _. Наверное, это знак."
-    ]
+    def sound(self):
+        return "ТрТрТрТр"
 
-new_sentences = generate(words, sentences)
+pz1c = LightTank("Pz.Kpfw. I Ausf. C", "Германия",
+                 7.92, 165,
+                 8, 150, 79,
+                 320)
 
-for sentence in new_sentences:
-    print(sentence)
+kv2 = HeavyTank("КВ-2","СССР",
+           152, 2.5,
+           60.8, 640, 35)
+
+print(f"Двигатель танка {pz1c.model} звучит как '{pz1c.sound()}'")
+print(f"Двигатель танка {kv2.model} звучит как '{kv2.sound()}'")
 ```
 
 ### Результат.
