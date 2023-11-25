@@ -145,10 +145,10 @@ class ElectricCar(Car):
 """
         print(f"Charging the {self.make} {self.model} with {self.battery_capacity} kWh")
 
-my_elecic_car = ElectricCar("Tesla", "Model S", 75)
+my_electric_car = ElectricCar("Tesla", "Model S", 75)
 # Создание экземпляра класса ElectricCar с маркой "Tesla", моделью "Model S" и емкостью батареи 75.
-my_elecic_car.drive()
-my_elecic_car.charge()
+my_electric_car.drive()
+my_electric_car.charge()
 # Вызов методов drive (наследуемый) и charge для объекта my_electric_car.
 ```
 
@@ -305,19 +305,18 @@ print(kv2.model)
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/S81.png)
 
 ## Выводы
-
+Этот код определяет класс Tank, который имеет конструктор __init__, принимающий параметр model. Внутри конструктора значение model присваивается атрибуту self.model, который является членом данного экземпляра класса. Затем создается экземпляр класса Tank с именем kv2. После этого выводится значение атрибута model созданного экземпляра на экран с помощью print.
  
 ## Самостоятельная работа №2
 ### Самостоятельно создайте атрибуты и методы для ранее созданного класса. Они должны отличаться, от тех, что указаны в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
 
 ```python
 class Tank:
-    def __init__(self, model, country, tank_type,
+    def __init__(self, model, country,
                  gun_caliber, firing_rate,
                  weight, engine_power, speed):
         self.model = model
         self.country = country
-        self.tank_type = tank_type
         self.gun_caliber = gun_caliber
         self.firing_rate = firing_rate
         self.weight = weight
@@ -331,7 +330,7 @@ class Tank:
         result = self.firing_rate * minutes
         return result
 
-kv2 = Tank("КВ-2","СССР", "Тяжелый",
+kv2 = Tank("КВ-2","СССР",
            152, 2.5,
            60.8, 640, 35)
 kv2.shoot()
@@ -343,77 +342,119 @@ print(f"Танк {kv2.model} выстрелил {kv2.shots_per_minute(minutes)} 
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/S82.png)
 
 ## Выводы
+Этот код представляет собой определение класса Tank (танк), который имеет различные характеристики, такие как модель, страна производитель, калибр орудия, скорострельность, вес, мощность двигателя и скорость. У класса также есть два метода:
 
+1. shoot() - выводит сообщение о том, что танк стреляет, указывая модель, страну и калибр орудия.
+2. shots_per_minute() - принимает аргумент minutes (количество минут) и возвращает общее количество выстрелов, которые танк сможет сделать за указанное количество минут, основываясь на его скорострельности.
+
+После определения класса создается экземпляр танка с именем kv2, затем для созданного объекта вызываются методы shoot() и shots_per_minute().
 
 ## Самостоятельная работа №3
 ### Самостоятельно реализуйте наследование, продолжая работать с ранее созданным классом. Оно должно отличаться, от того, что указано в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
 
 ```python
-with open('input.txt', encoding='utf-8') as f:
-    data = f.read()
+import random
 
-    excluded = [' ', '\n', '.']
-    count = 0
-    for letter in data:
-        if letter not in excluded:
-            count += 1
-    letters = count
+class Tank:
+    def __init__(self, model, country,
+                 gun_caliber, firing_rate,
+                 weight, engine_power, speed):
+        self.model = model
+        self.country = country
+        self.gun_caliber = gun_caliber
+        self.firing_rate = firing_rate
+        self.weight = weight
+        self.engine_power = engine_power
+        self.speed = speed
 
-    words = len(data.split())
-    lines = len(data.split('\n'))
+    def shoot(self):
+        print(f"Танк {self.model} ({self.country}) стреляет из орудия калибра {self.gun_caliber} мм")
 
-print(f"Input file contains:\n{letters} letters\n{words} words\n{lines} lines")
+    def shots_per_minute(self, minutes):
+        result = self.firing_rate * minutes
+        return result
+
+kv2 = Tank("КВ-2","СССР",
+           152, 2.5,
+           60.8, 640, 35)
+kv2.shoot()
+minutes = 5
+print(f"Танк {kv2.model} выстрелил {kv2.shots_per_minute(minutes)} раз(а) за {minutes} минут")
+
+class LightTank(Tank):
+    def __init__(self, model, country,
+                 gun_caliber, firing_rate,
+                 weight, engine_power, speed,
+                 view_range):
+        self.model = model
+        self.country = country
+        self.gun_caliber = gun_caliber
+        self.firing_rate = firing_rate
+        self.weight = weight
+        self.engine_power = engine_power
+        self.speed = speed
+        self.view_range = view_range
+
+    def scout(self):
+        chance = random.randint(1, 2)
+        if chance == 1:
+            print(f"Танк {self.model} ({self.country}) обнаружен и едет со скоростью {self.speed} км/ч")
+        else:
+            print(f"Танк {self.model} ({self.country}) разведывает территорию в диапазоне {self.view_range} м")
+
+pz1c = LightTank("Pz.Kpfw. I Ausf. C", "Германия",
+                 7.92, 165,
+                 8, 150, 79,
+                 320)
+pz1c.shoot()
+pz1c.scout()
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S73.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/S831.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/S832.png)
 
 ## Выводы
 
-1. Чтобы найти количество букв в текстовом файле, необходимо составить список исключенных символов (пробел, перенос на следующую строку, точка) и проверить каждую букву (символ) на отсутствие в нем. Если буква не исключена, то к счетчику прибавляется 1.
-2. Чтобы найти количество слов, данные из текста делятся на слова методом split (по умолчанию разделитель - пробел), а затем вычисляется длина получившегося списка.
-3. Чтобы найти количество строк, нужно использовать метод split с разделителем \n и вычислить длину получившегося списка.
+Класс LightTank является подклассом (или дочерним классом) класса Tank. Он наследует атрибуты и методы от родительского класса Tank, но имеет и свои собственные атрибуты и методы, такие как view_range и scout(). Он также может использовать методы из родительского класса, такие как shoot и shots_per_minute.
 
 ## Самостоятельная работа №4
 ### Самостоятельно реализуйте инкапсуляцию, продолжая работать с ранее созданным классом. Она должна отличаться, от того, что указана в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
 
-
 ```python
-def censor_text(text, banned_words):
-    for word in banned_words:
-        block = "*" * len(word)
-        text = text.replace(word, block)
-    return text
+class Tank:
+    def __init__(self, model, country,
+                 gun_caliber, firing_rate,
+                 weight, engine_power, speed):
+        self.__model = model
+        self.country = country
+        self.gun_caliber = gun_caliber
+        self.firing_rate = firing_rate
+        self.weight = weight
+        self.engine_power = engine_power
+        self.speed = speed
 
-with open('input.txt', encoding='utf-8') as f:
-    data = f.read()
-    banned_words = data.split()
-    text = ("Hello, world! Python IS the programming language of thE future. My\nEMAIL is....\nPYTHON is awesome!!!!")
-    text_low = text.lower()
+    def shoot(self):
+        print(f"Танк {self.__model} ({self.country}) стреляет из орудия калибра {self.gun_caliber} мм")
 
-censored_text = censor_text(text_low, banned_words)
+    def shots_per_minute(self, minutes):
+        result = self.firing_rate * minutes
+        return result
 
-index = 0
-result = ''
-
-for letter in censored_text:
-    if letter == '*':
-        result += letter
-        index += 1
-    else:
-        result += text[index]
-        index += 1
-
-print(result)
+kv2 = Tank("КВ-2","СССР",
+           152, 2.5,
+           60.8, 640, 35)
+kv2.shoot()
+minutes = 5
+print(f"Танк {kv2.__model} выстрелил {kv2.shots_per_minute(minutes)} раз(а) за {minutes} минут")
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S74.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/S84.png)
 
 ## Выводы
 
-1. Функция censor_text принимает на вход исходный текст в нижнем регистре и список запрещенных слов. Для каждого запрещенного слова вычисляется блок со звездочками, который соответствует длине слова ("*" * len(word)). Затем в полученном тексте все встреченные запрещенные слова заменяются на такие блоки.
-2. Чтобы вернуть исходный регистр некоторым нетронутым словам, пришлось прибегнуть к замене. Проверялась каждая буква (символ) из полученного зацензуренного текста - если это звездочка, то она прибавляется к результирующему тексту, а индекс увеличивается на 1, если это иная буква (символ) то к результату прибавляется буква (символ) исходого текста и индекс снова увеличивается на 1.
+В данном коде переменная model объявлена с использованием двойного подчеркивания в начале имени (__model). Это означает, что переменная доступна только внутри класса Tank и не может быть прямо доступна извне (последняя строка кода).
 
 ## Самостоятельная работа №5
 ### Самостоятельно реализуйте полиморфизм. Он должен отличаться, от того, что указан в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
@@ -446,10 +487,8 @@ for sentence in new_sentences:
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S751.png)
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_7/pic/S752.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/S85.png)
 
 ## Выводы
 
-Функция generate принимает на вход список слов для генерации и список предложений. На основе каждого предложения из списка предложений генерируется новое предложение, которое заменяет символ '_' на случайное слово из списка words. При этом операция замены происходит два раза (сначала для generated, потом для generated_again, каждый раз заменяется только один символ для того, чтобы в предложении с двумя повторами вставленные слова не повторялись).
-
+Метод sound объявлен в родительском классе Tank, а затем переопределен в дочерних классах HeavyTank и LightTank. Это означает, что объекты разных типов (тяжелый танк и легкий танк) могут использовать один и тот же метод sound, но предоставлять различную реализацию для этого метода.
