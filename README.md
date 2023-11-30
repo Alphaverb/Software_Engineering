@@ -184,7 +184,6 @@ greet(john)
 стадии созревания помидора
 3) Создайте метод __init__(), внутри которого будут определены два
 динамических свойства: _index (передается параметром) и _state
-Михаил А. Панов
 (принимает первое значение из словаря states). После написания
 этого блока кода в комментарии к нему укажите какими являются
 эти два свойства
@@ -227,22 +226,201 @@ greet(john)
 помидорами
 4) Попробуйте собрать урожай, когда томаты еще не дозрели.
 Продолжайте ухаживать за ними
-Михаил А. Панов
 5) Соберите урожай
 Результатом работы вашей программы будет листинг кода с подробными
-комментариями и скриншоты выполенния всех тестов.
+комментариями и скриншоты выполнения всех тестов.
 
 ```python
-class Tank:
-    def __init__(self, model):
-        self.model = model
+class Tomato:
+    states = {'Отсутствует': 0, 'Цветение': 1, 'Зеленый': 2, 'Красный': 3}
 
-kv2 = Tank("КВ-2")
-print(kv2.model)
+    def __init__(self, index):
+        self._index = index
+        self._state = self.states['Отсутствует']
+
+    def grow(self):
+        if self._state < 3:
+            self._state += 1
+
+    def is_ripe(self):
+        return True if self._state == 3 else False
+
+class TomatoBush:
+    def __init__(self, num):
+        self.tomatoes = [Tomato(index) for index in range(1, num + 1)]
+
+    def grow_all(self):
+        for tomato in self.tomatoes:
+            tomato.grow()
+
+    def all_are_ripe(self):
+        return all([tomato.is_ripe() for tomato in self.tomatoes])
+
+    def give_away_all(self):
+        self.tomatoes = []
+
+class Gardener:
+    def __init__(self, name, plant):
+        self.name = name
+        self._plant = plant
+
+    def work(self):
+        self._plant.grow_all()
+
+    def harvest(self):
+        if self._plant.all_are_ripe():
+            print('Урожай собран!')
+            self._plant.give_away_all()
+        else:
+            print('Подождите, томаты еще не дозрели')
+
+    @staticmethod
+    def knowledge_base():
+        print('Справка по садоводству:\n'
+              '1. Выбирайте сорта томатов, подходящие для вашего региона и климата\n'
+              '2. Заготовьте плодородную почву с хорошим дренажем. Томаты любят рыхлую почву\n'
+              '3. Сажайте рассаду томатов после последнего заморозка\n'
+              '4. Регулярно поливайте томаты, особенно в период созревания плодов\n'
+              '5. Применяйте удобрения с учетом потребностей томатов в питательных веществах\n'
+              '6. Используйте опоры, чтобы поддерживать растения, особенно если у вас высокие сорта томатов\n'
+              '7. Проводите обрезку, чтобы удалить лишние листья и побеги\n'
+              '8. Регулярно осматривайте растения на наличие вредителей и признаков болезней\n')
+
+Gardener.knowledge_base()
+
+tomato_bush = TomatoBush(5)
+gardener = Gardener('Брэд', tomato_bush)
+# print(f"Садовник {gardener.name} выращивает {len(tomato_bush.tomatoes)} томат(а/ов)")
+
+gardener.work()
+# print(f"Томаты находятся в состоянии: '{list(Tomato.states.keys())[tomato_bush.tomatoes[0]._state]}'")
+
+gardener.work()
+gardener.harvest()
+
+gardener.work()
+gardener.work()
+gardener.work()
+gardener.harvest()
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/S81.png)
+
+```python
+# Определение класса Tomato
+class Tomato:
+    # Статический словарь состояний томата
+    states = {'Отсутствует': 0, 'Цветение': 1, 'Зеленый': 2, 'Красный': 3}
+
+    # Конструктор объекта томата
+    def __init__(self, index):
+        self._index = index # Индекс томата
+        self._state = self.states['Отсутствует'] # Начальное состояние "Отсутствует"
+
+    # Метод роста томата
+    def grow(self):
+        if self._state < 3: # Увеличиваем состояние на 1, если оно меньше 3
+            self._state += 1
+
+    # Метод проверки зрелости томата
+    def is_ripe(self):
+        return True if self._state == 3 else False # Возвращает True, если томат созрел (красный)
+
+# Определение класса TomatoBush
+class TomatoBush:
+    # Конструктор объекта куста томатов
+    def __init__(self, num): 
+        # Инициализация списка томатов, создание объектов класса Tomato
+        self.tomatoes = [Tomato(index) for index in range(1, num + 1)]
+
+    # Метод роста всех томатов (объектов Tomato)
+    def grow_all(self):
+        for tomato in self.tomatoes:
+            tomato.grow()
+
+    # Метод проверки зрелости всех томатов в кусте
+    def all_are_ripe(self):
+        return all([tomato.is_ripe() for tomato in self.tomatoes])
+
+    # Метод для сбора всего урожая 
+    def give_away_all(self):
+        self.tomatoes = [] # Обнуляем список томатов
+
+
+# Определение класса Gardener
+class Gardener:
+    # Конструктор объекта садовника
+    def __init__(self, name, plant):
+        self.name = name # Имя садовника
+        self._plant = plant # Растение, за которым ухаживает садовник
+
+    # Метод для работы с растением (ухода за растением)
+    def work(self):
+        self._plant.grow_all() # Вызов метода grow_all у растения (все томаты растут, увеличивая индекс своего состояния на 1)
+
+    # Метод для сбора урожая
+    def harvest(self):
+        if self._plant.all_are_ripe(): # Если все томаты созрели, выводим сообщение, собираем урожай и обнуляем список томатов
+            print('Урожай собран!')
+            self._plant.give_away_all()
+        else:
+            print('Подождите, томаты еще не дозрели')
+
+    # Статический метод со справкой по садоводству
+    @staticmethod
+    def knowledge_base():
+        print('Справка по садоводству:\n'
+              '1. Выбирайте сорта томатов, подходящие для вашего региона и климата\n'
+              '2. Заготовьте плодородную почву с хорошим дренажем. Томаты любят рыхлую почву\n'
+              '3. Сажайте рассаду томатов после последнего заморозка\n'
+              '4. Регулярно поливайте томаты, особенно в период созревания плодов\n'
+              '5. Применяйте удобрения с учетом потребностей томатов в питательных веществах\n'
+              '6. Используйте опоры, чтобы поддерживать растения, особенно если у вас высокие сорта томатов\n'
+              '7. Проводите обрезку, чтобы удалить лишние листья и побеги\n'
+              '8. Регулярно осматривайте растения на наличие вредителей и признаков болезней\n')
+
+# Тест статического метода справки
+Gardener.knowledge_base()
+
+# Тест создания объектов классов TomatoBush и Gardener 
+# Создание куста томатов с 5 томатами
+tomato_bush = TomatoBush(5)
+# Создание садовника с именем "Брэд" и указанным кустом томатов
+gardener = Gardener('Брэд', tomato_bush)
+# print(f"Садовник {gardener.name} выращивает {len(tomato_bush.tomatoes)} томат(а/ов)")
+
+# Тест метода работы садовника (увеличение индекса состояния томатов)
+gardener.work()
+# print(f"Томаты находятся в состоянии: '{list(Tomato.states.keys())[tomato_bush.tomatoes[0]._state]}'")
+
+# Тест метода сбора урожая (так как урожай не созрел, выведется предупреждение)
+gardener.work()
+gardener.harvest()
+
+# Тест метода сбора урожая (урожай созрел, выведется сообщение об успешном выполнении)
+gardener.work()
+gardener.work()
+gardener.work()
+gardener.harvest()
+```
+
+#### Тест 1:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_9/pic/S911.png)
+
+#### Тест 2:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_9/pic/S912.png)
+
+#### Тест 3:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_9/pic/S913.png)
+
+#### Тест 4:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_9/pic/S914.png)
+
+#### Тест 5:
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_9/pic/S915.png)
 
 ## Выводы
-Этот код определяет класс Tank, который имеет конструктор __init__, принимающий параметр model. Внутри конструктора значение model присваивается атрибуту self.model, который является членом данного экземпляра класса. Затем создается экземпляр класса Tank с именем kv2. После этого выводится 
+
+1.  Класс Tomato и метод is_ripe предоставляют пример полиморфизма, поскольку разные объекты (томаты) могут использовать один и тот же метод, но с разными результатами в зависимости от своего состояния.
+2.  Защищенные атрибуты создаются путем добавления одного подчеркивания (_) перед именем атрибута или метода. Они используются, когда разработчик хочет запретить доступ снаружи объекта, но дать возможность работать с ними внутри объекта класса-наследника или суперкласса.
+3.  Статические методы декларируются при помощи декоратора staticmethod. Им не нужен определённый первый аргумент (ни self, ни cls). Их можно воспринимать как методы, которые "не знают, к какому классу относятся". Таким образом, статические методы прикреплены к классу лишь для удобства и не могут менять состояние ни класса, ни его экземпляра.
