@@ -19,279 +19,142 @@
 ### Допустим, что вы решили оригинально и немного странно познакомится с человеком. Для этого у вас должен быть написан свой класс на Python, который будет проверять угадал ваше имя человек или нет. Для этого создайте класс, указав в свойствах только имя. Дальше создайте функцию __init__(), а в ней сделайте проверку на то угадал человек ваше имя или нет. Также можете проверить что будет, если в этой функции указав атрибут, который не указан в вашем классе, например, попробуйте вызвать фамилию.
 
 ```python
-class Car: 
-    def __init__(self, make, model):
-        self.make = make
-        self.model = model
+class Ivan:
+    __slots__ = ['name']
 
-my_car = Car("Toyota","Corolla")
+    def __init__(self, name):
+        if name == 'Иван':
+            self.name = f"Да, я {name}"
+        else:
+            self.name = f"Я не {name}, а Иван"
+
+person1 = Ivan('Алексей')
+person2 = Ivan('Иван')
+print(person1.name)
+print(person2.name)
+
+person2.surname = 'Петров'
 ```
 
 ### Результат.
-
-```python
-class Car:
-# Определение класса с именем Car.
-    def __init__(self, make, model):
-"""
-Метод инициализации (конструктор) класса.
-Метод __init__ вызывается при создании нового объекта этого класса.
-Параметры self, make и model представляют объект, производителя и модель автомобиля соответственно.
-"""
-        self.make = make
-# Эта строка присваивает значение параметра make атрибуту make объекта self, который вызывает этот метод.
-        self.model = model
-# Эта строка присваивает значение параметра model атрибуту model объекта self, который вызывает этот метод.
-
-my_car = Car("Toyota","Corolla")
-# Создание объекта Car с именем my_car, в который передаются значения "Toyota" и "Corolla" для параметров make и model.
-```
-
-Таким образом, создается экземпляр класса Car с конкретным производителем и моделью.
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_9/pic/L91.png)
 
 ## Лабораторная работа №2
 ### Вам дали важное задание, написать продавцу мороженого программу, которая будет писать добавили ли топпинг в мороженое и цену после возможного изменения. Для этого вам нужно написать класс, в котором будет определяться изменили ли состав мороженого или нет. В этом классе реализуйте метод, выводящий на печать «Мороженое с {ТОППИНГ}» в случае наличия добавки, а иначе отобразится следующая фраза: «Обычное мороженое». При этом программа должна воспринимать как топпинг только атрибуты типа string.
 
 ```python
-class Car:
-    def __init__(self, make, model):
-        self.make = make
-        self.model = model
+class Icecream:
+    def __init__(self, ingredient=None):
+        if isinstance(ingredient, str):
+            self.ingredient = ingredient
+        else:
+            self.ingredient = None
 
-    def drive(self):
-        print(f"Driving the {self.make} {self.model}")
+    def composition(self):
+        if self.ingredient:
+            print(f"Мороженое с {self.ingredient}")
+        else:
+            print('Обычное мороженое')
 
-my_car = Car("Toyota","Corolla")
-my_car.drive()
+icecream = Icecream()
+icecream.composition()
+icecream = Icecream('шоколадом')
+icecream.composition()
+icecream = Icecream(5)
+icecream.composition()
 ```
 
 ### Результат.
-```python
-class Car:
-    def __init__(self, make, model):
-        self.make = make
-        self.model = model
-
-    def drive(self):
-"""
-Метод класса, который выводит сообщение о том, в какой машине едут (использует значения атрибутов make и model).
-"""
-        print(f"Driving the {self.make} {self.model}")
-
-my_car = Car("Toyota","Corolla")
-my_car.drive()
-# Вызов метода drive для объекта my_car.
-# Выводится сообщение о том, в какой машине едут, используя значения атрибутов make (производитель) и model (модель).
-```
-
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/L82.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_9/pic/L92.png)
 
 ## Лабораторная работа №3
 ### Петя – начинающий программист и на занятиях ему сказали реализовать икапсу…что-то. А вы хороший друг Пети и ко всему прочему прекрасно знаете, что икапсу…что-то – это инкапсуляция, поэтому решаете помочь вашему другу с написанием класса с инкапсуляцией. Ваш класс будет не просто инкапсуляцией, а классом с сеттером, геттером и деструктором. После написания класса вам необходимо продемонстрировать что все написанные вами функции работают. Также вас необходимо объяснить Пете почему на скриншоте ниже в консоли выводится ошибка.
 
 ```python
-class Car:
-    def __init__(self, make, model):
-        self.make = make
-        self.model = model
+class MyClass:
+    def __init__(self, value):
+        self._value = value
 
-    def drive(self):
-        print(f"Driving the {self.make} {self.model}")
+    def set_value(self, value):
+        self._value = value
 
-my_car = Car("Toyota","Corolla")
-my_car.drive()
+    def get_value(self):
+        return self._value
 
-class ElectricCar(Car):
-    def __init__(self, make, model, battery_capacity):
-        super().__init__(make, model)
-        self.battery_capacity = battery_capacity
+    def del_value(self):
+        del self._value
 
-    def charge(self):
-        print(f"Charging the {self.make} {self.model} with {self.battery_capacity} kWh")
+    value = property(get_value, set_value, del_value, "Свойство value")
 
-my_elecic_car = ElectricCar("Tesla", "Model S", 75)
-my_elecic_car.drive()
-my_elecic_car.charge()
+obj = MyClass(42)
+print(obj.get_value())
+obj.set_value(45)
+print(obj.get_value())
+obj.set_value(100)
+print(obj.get_value())
+obj.del_value()
+print(obj.get_value())
 ```
 
 ### Результат.
-```python
-class Car:
-    def __init__(self, make, model):
-        self.make = make
-        self.model = model
-
-    def drive(self):
-        print(f"Driving the {self.make} {self.model}")
-
-my_car = Car("Toyota","Corolla")
-my_car.drive()
-
-class ElectricCar(Car):
-# Определение класса ElectricCar, наследующегося от Car.
-    def __init__(self, make, model, battery_capacity):
-"""
-Конструктор __init__, который вызывает конструктор родительского класса с помощью super().
-Добавляет атрибут battery_capacity (емкость батареи).
-"""
-        super().__init__(make, model)
-        self.battery_capacity = battery_capacity
-
-    def charge(self):
-"""
-Метод charge класса ElectricCar.
-Выводит сообщение о том, что электромобиль определенной марки (make), модели (model) и емкости батареи (battery_capacity) заряжается.
-"""
-        print(f"Charging the {self.make} {self.model} with {self.battery_capacity} kWh")
-
-my_electric_car = ElectricCar("Tesla", "Model S", 75)
-# Создание экземпляра класса ElectricCar с маркой "Tesla", моделью "Model S" и емкостью батареи 75.
-my_electric_car.drive()
-my_electric_car.charge()
-# Вызов методов drive (наследуемый) и charge для объекта my_electric_car.
-```
-
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/L83.png)
+Проблема в коде связана с тем, что метод del_value используется для удаления атрибута _value, но при этом происходит обращение к этому атрибуту в методе get_value. После удаления атрибута его уже не существует, и поэтому возникает ошибка AttributeError.
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_9/pic/L93.png)
 
 ## Лабораторная работа №4
 ### Вам прекрасно известно, что кошки и собаки являются млекопитающими, но компьютер этого не понимает, поэтому вам нужно написать три класса: Кошки, Собаки, Млекопитающие. И при помощи “наследования” объяснить компьютеру что кошки и собаки – это млекопитающие. Также добавьте какой-нибудь свой атрибут для кошек и собак, чтобы показать, что они чем-то отличаются друг от друга.
 
 ```python
-class Car:
-    def __init__(self, make, model):
-        self._make = make
-        self.__model = model
+class Mammal:
+    className = 'Mammal'
 
-    def drive(self):
-        print(f"Driving the {self._make} {self.__model}")
+class Dog(Mammal):
+    species = 'canine'
+    sounds = 'wow'
 
-my_car = Car("Toyota", "Corolla")
-print(my_car._make)
-# print(my_car.__model)
-my_car.drive()
+class Cat(Mammal):
+    species = 'feline'
+    sounds = 'meow'
+
+dog = Dog()
+print(f"Dog is {dog.className}, but they say {dog.sounds}")
+cat = Cat()
+print(f"Cat is {cat.className}, but they say {cat.sounds}")
 ```
 
 ### Результат.
-
-```python
-class Car:
-    def __init__(self, make, model):
-        self._make = make
-# Защищенный атрибут.
-# Имя начинается с одного нижнего подчеркивания, что обозначает его доступность внутри класса и его подклассов.
-        self.__model = model
-# Приватный атрибут.
-# Имя начинается с двух подчеркиваний. Он доступен только внутри класса.
-
-    def drive(self):
-        print(f"Driving the {self._make} {self.__model}")
-
-my_car = Car("Toyota", "Corolla")
-print(my_car._make)
-# Вывод значения защищенного атрибута _make с использованием print(my_car._make).
-# print(my_car.__model)
-# Вывод значения приватного атрибута __model с использованием print(my_car.__model).
-# Это вызовет ошибку, так как приватные атрибуты не могут быть прямо доступны извне класса.
-my_car.drive()
-```
-
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/L841.png)
-
-### Попытка вызова приватного атрибута (print(my_car.__model)):
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/L842.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_9/pic/L94.png)
 
 ## Лабораторная работа №5
 ### На разных языках здороваются по-разному, но суть остается одинаковой, люди друг с другом здороваются. Давайте вместе с вами реализуем программу с полиморфизмом, которая будет описывать всю суть первого предложения задачи. Для этого мы можем выбрать два языка, например, русский и английский и написать для них отдельные классы, в которых будет в виде атрибута слово, которым здороваются на этих языках. А также напишем функцию, которая будет выводить информацию о том, как на этих языках здороваются. Заметьте, что для решения поставленной задачи мы использовали декоратор @staticmethod, поскольку нам не нужны обязательные параметры-ссылки вроде self.
 
 ```python
-class Shape:
-    def area(self):
-        pass
+class Russian:
+    @staticmethod
+    def greeting():
+        print("Привет")
 
-class Rectangle(Shape):
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
+class English:
+    @staticmethod
+    def greeting():
+        print("Hello")
 
-    def area(self):
-        return self.width * self.height
+def greet(language):
+    language.greeting()
 
-class Circle(Shape):
-    def __init__(self, radius):
-        self.radius = radius
-
-    def area(self):
-        return 3.14 * self.radius * self.radius
-
-circle = Circle(radius=3)
-rectangle = Rectangle(width=4, height=5)
-shapes = [rectangle, circle]
-
-for shape in shapes:
-    print(shape.area())
+ivan = Russian()
+greet(ivan)
+john = English()
+greet(john)
 ```
 
 ### Результат.
-```python
-class Shape:
-# Базовый класс формы, который предоставляет метод area(). 
-    def area(self):
-"""
-Абстрактный метод, так как онне имеет реализации (просто pass).
-Он предполагает, что любой подкласс Shape должен предоставить собственную реализацию метода.
-"""
-        pass
-
-class Rectangle(Shape):
-# Подкласс Shape, представляет собой прямоугольник.
-    def __init__(self, width, height):
-"""
-Конструктор __init__.
-Имеет атрибуты width (ширина) и height (высота).
-"""
-        self.width = width
-        self.height = height
-
-    def area(self):
-"""
-Переопределенный метод нахождения площади.
-"""
-        return self.width * self.height
-
-class Circle(Shape):
-# Подкласс Shape, представляет собой круг.
-    def __init__(self, radius):
-"""
-Конструктор __init__.
-Имеет атрибут radius (радиус).
-"""
-        self.radius = radius
-
-    def area(self):
-"""
-Переопределенный метод нахождения площади.
-"""
-        return 3.14 * self.radius * self.radius
-
-rectangle = Rectangle(width=4, height=5)
-circle = Circle(radius=3)
-# Создание объектов прямоугольника и круга.
-shapes = [rectangle, circle]
-# Добавление объектов в список.
-
-for shape in shapes:
-    print(shape.area())
-# Цикл, который проходится по каждой фигуре в списке shapes.
-# Выводит площадь фигуры с помощью методов area.
-```
-
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_8/pic/L85.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_9/pic/L95.png)
 
 # Самостоятельные работы
 ## Самостоятельная работа №1
-### Задание Садовник и помидоры
-### Классовая структура:
+### Задание "Садовник и помидоры"
 
+### Классовая структура:
 ### Есть Помидор со следующими характеристиками:
 - Индекс
 - Стадия созревания (стадии: отсутствует, цветение, зеленый, красный)
