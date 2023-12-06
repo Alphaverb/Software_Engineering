@@ -20,21 +20,18 @@
 ### P.S. при запуске без декоратора можете долго не ждать, для наглядности хватит 10 секунд ожидания
 
 ```python
-class Ivan:
-    __slots__ = ['name']
+from functools import lru_cache
 
-    def __init__(self, name):
-        if name == 'Иван':
-            self.name = f"Да, я {name}"
-        else:
-            self.name = f"Я не {name}, а Иван"
+@lru_cache(None)
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    return fibonacci(n - 1) + fibonacci(n - 2)
 
-person1 = Ivan('Алексей')
-person2 = Ivan('Иван')
-print(person1.name)
-print(person2.name)
-
-person2.surname = 'Петров'
+if __name__ == '__main__':
+    print(fibonacci(100))
 ```
 
 ### Результат.
@@ -45,25 +42,24 @@ person2.surname = 'Петров'
 ### Причем заметьте, что неважно сколько пользователь введет данных на сайт к Илье, будут обрабатываться только первые 2 аргумента.
 
 ```python
-class Icecream:
-    def __init__(self, ingredient=None):
-        if isinstance(ingredient, str):
-            self.ingredient = ingredient
-        else:
-            self.ingredient = None
+def check(input_func):
+    def output_func(*args):
+        name, age = args[0], args[1]
 
-    def composition(self):
-        if self.ingredient:
-            print(f"Мороженое с {self.ingredient}")
-        else:
-            print('Обычное мороженое')
+        if age < 0 or age > 130:
+            age = 'Недопустимый возраст'
+        input_func(name, age)
 
-icecream = Icecream()
-icecream.composition()
-icecream = Icecream('шоколадом')
-icecream.composition()
-icecream = Icecream(5)
-icecream.composition()
+    return output_func
+
+@check
+def personal_info(name, age):
+    print(f"Name: {name} Age: {age}")
+
+if __name__ == '__main__':
+    personal_info('Владимир', 38)
+    personal_info('Александр', -5)
+    personal_info('Петр', 138, 15, 48, 2)
 ```
 
 ### Результат.
@@ -75,54 +71,42 @@ icecream.composition()
 ### Также дополнительно можете обернуть весь код функции в try/except/finally для того, чтобы программа вас оповестила о том, что выявлена какая-то ошибка или программа успешно выполнена.
 
 ```python
-class MyClass:
-    def __init__(self, value):
-        self._value = value
+def data(*args):
+    try:
+        for i in range(len(*args)):
+            try:
+                result = (args[0][i] * 15) // 10
+                print(result)
+            except Exception as ex:
+                print(ex)
+    except Exception as ex:
+        print(ex)
+    finally:
+        print('Вся информация обработана')
 
-    def set_value(self, value):
-        self._value = value
-
-    def get_value(self):
-        return self._value
-
-    def del_value(self):
-        del self._value
-
-    value = property(get_value, set_value, del_value, "Свойство value")
-
-obj = MyClass(42)
-print(obj.get_value())
-obj.set_value(45)
-print(obj.get_value())
-obj.set_value(100)
-print(obj.get_value())
-obj.del_value()
-print(obj.get_value())
+if __name__ == '__main__':
+    data([1, 15, 'Hello', 'i', 'try', 'to', 'crash', 'your', 'site', 38, 45])
 ```
 
 ### Результат.
-Проблема в коде связана с тем, что метод del_value используется для удаления атрибута _value, но при этом происходит обращение к этому атрибуту в методе get_value. После удаления атрибута его уже не существует, и поэтому возникает ошибка AttributeError:
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_10/pic/L103.png)
 
 ## Лабораторная работа №4
 ### Продолжая работу над сайтом, вы решили написать собственное исключение, которое будет вызываться в случае, если в функцию проверки имени при регистрации передана строка длиннее десяти символов, а если имя имеет допустимую длину, то в консоль выводится “Успешная регистрация”.
 
 ```python
-class Mammal:
-    className = 'Mammal'
+class NegativeValueException(Exception):
+    pass
 
-class Dog(Mammal):
-    species = 'canine'
-    sounds = 'wow'
+def check_name(name):
+    if len(name) > 10:
+        raise NegativeValueException('Длина больше 10 символов')
+    else:
+        print('Успешная регистрация')
 
-class Cat(Mammal):
-    species = 'feline'
-    sounds = 'meow'
-
-dog = Dog()
-print(f"Dog is {dog.className}, but they say {dog.sounds}")
-cat = Cat()
-print(f"Cat is {cat.className}, but they say {cat.sounds}")
+if __name__ == '__main__':
+    name = '12345678910'
+    check_name(name)
 ```
 
 ### Результат.
@@ -132,27 +116,28 @@ print(f"Cat is {cat.className}, but they say {cat.sounds}")
 ### После запуска сайта вы поняли, что вам необходимо добавить логгер, для отслеживания его работы. Готовыми вариантами вы не захотели пользоваться, и поэтому решили создать очень простую пародию. Для этого создали две функции: __init__() (вызывается при создании класса декоратора в программе) и __call__() (вызывается при вызове декоратора). Создайте необходимый вам декоратор. Выведите все логи в консоль.
 
 ```python
-class Russian:
-    @staticmethod
-    def greeting():
-        print("Привет")
+class SiteChecker:
+    def __init__(self, func):
+        print('> Класс SiteChecker метод __init__ успешный запуск')
+        self.func = func
 
-class English:
-    @staticmethod
-    def greeting():
-        print("Hello")
+    def __call__(self):
+        print('> Проверка перед запуском', self.func.__name__)
+        self.func()
+        print('> Проверка безопасного выключения')
 
-def greet(language):
-    language.greeting()
+@SiteChecker
+def site():
+    print('Усердная работа сайта')
 
-ivan = Russian()
-greet(ivan)
-john = English()
-greet(john)
+if __name__ == '__main__':
+    print('>> Сайт запущен')
+    site()
+    print('>> Сайт выключен')
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_9/pic/L95.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_10/pic/L105.png)
 
 # Самостоятельные работы
 ## Самостоятельная работа №1
