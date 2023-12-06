@@ -93,6 +93,6 @@ if __name__ == '__main__':
             print('Ошибка!')
 ```
 
-### Результат.
+## Результат.
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Итоговый_проект/pic/1.png)
 
