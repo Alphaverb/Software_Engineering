@@ -260,7 +260,7 @@ def decorator_uppercase(function):
 
 @decorator_uppercase
 def quote1():
-    return 'Teamwork makes the dream work'
+    return 'Teamwork makes a dreamwork'
 
 @decorator_uppercase
 def quote2():
