@@ -160,77 +160,28 @@ if __name__ == '__main__':
 ### Также на этом примере можете посмотреть, что решение задач через рекурсию не всегда является хорошей идеей. Поскольку решение Фибоначчи для 100 с использованием рекурсии и без динамического программирования решается более десяти секунд, а решение точно такой же задачи, но через цикл for еще и для 200, занимает меньше 1 секунды.
 
 ```python
-class Tomato:
-    states = {'Отсутствует': 0, 'Цветение': 1, 'Зеленый': 2, 'Красный': 3}
+import time
 
-    def __init__(self, index):
-        self._index = index
-        self._state = self.states['Отсутствует']
+def time_counter(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"\nВремя выполнения функции: {elapsed_time} секунд")
+        return result
+    return wrapper
 
-    def grow(self):
-        if self._state < 3:
-            self._state += 1
+@time_counter
+def fibonacci():
+    fib1 = fib2 = 1
 
-    def is_ripe(self):
-        return True if self._state == 3 else False
+    for i in range(2, 200):
+        fib1, fib2 = fib2, fib1 + fib2
+        print(fib2, end=' ')
 
-class TomatoBush:
-    def __init__(self, num):
-        self.tomatoes = [Tomato(index) for index in range(1, num + 1)]
-
-    def grow_all(self):
-        for tomato in self.tomatoes:
-            tomato.grow()
-
-    def all_are_ripe(self):
-        return all([tomato.is_ripe() for tomato in self.tomatoes])
-
-    def give_away_all(self):
-        self.tomatoes = []
-
-class Gardener:
-    def __init__(self, name, plant):
-        self.name = name
-        self._plant = plant
-
-    def work(self):
-        self._plant.grow_all()
-
-    def harvest(self):
-        if self._plant.all_are_ripe():
-            print('Урожай собран!')
-            self._plant.give_away_all()
-        else:
-            print('Подождите, томаты еще не дозрели')
-
-    @staticmethod
-    def knowledge_base():
-        print('Справка по садоводству:\n'
-              '1. Выбирайте сорта томатов, подходящие для вашего региона и климата\n'
-              '2. Заготовьте плодородную почву с хорошим дренажем. Томаты любят рыхлую почву\n'
-              '3. Сажайте рассаду томатов после последнего заморозка\n'
-              '4. Регулярно поливайте томаты, особенно в период созревания плодов\n'
-              '5. Применяйте удобрения с учетом потребностей томатов в питательных веществах\n'
-              '6. Используйте опоры, чтобы поддерживать растения, особенно если у вас высокие сорта томатов\n'
-              '7. Проводите обрезку, чтобы удалить лишние листья и побеги\n'
-              '8. Регулярно осматривайте растения на наличие вредителей и признаков болезней\n')
-
-Gardener.knowledge_base()
-
-tomato_bush = TomatoBush(5)
-gardener = Gardener('Брэд', tomato_bush)
-# print(f"Садовник {gardener.name} выращивает {len(tomato_bush.tomatoes)} томат(а/ов)")
-
-gardener.work()
-# print(f"Томаты находятся в состоянии: '{list(Tomato.states.keys())[tomato_bush.tomatoes[0]._state]}'")
-
-gardener.work()
-gardener.harvest()
-
-gardener.work()
-gardener.work()
-gardener.work()
-gardener.harvest()
+if __name__ == '__main__':
+    fibonacci()
 ```
 
 ### Результат.
@@ -238,171 +189,55 @@ gardener.harvest()
 
 ## Выводы
 
-1.  Класс Tomato и метод is_ripe предоставляют пример полиморфизма, поскольку разные объекты (томаты) могут использовать один и тот же метод, но с разными результатами в зависимости от своего состояния.
-2.  Защищенные атрибуты создаются путем добавления одного подчеркивания (_) перед именем атрибута или метода. Они используются, когда разработчик хочет запретить доступ снаружи объекта, но дать возможность работать с ними внутри объекта класса-наследника или суперкласса.
-3.  Статические методы декларируются при помощи декоратора staticmethod. Им не нужен определённый первый аргумент (ни self, ни cls). Их можно воспринимать как методы, которые "не знают, к какому классу относятся". Таким образом, статические методы прикреплены к классу лишь для удобства и не могут менять состояние ни класса, ни его экземпляра.
+1. Декоратор time_counter измеряет время выполнения функции и выводит результат в консоль (он использует модуль time для записи моментов начала и завершения выполнения функции). Затем этот декоратор применяется к функции fibonacci, используя фразу @time_counter. 
+2. Функция wrapper служит для замены оригинальной функции при использовании декоратора. Её цель - обернуть вызов оригинальной функции так, чтобы можно было добавить дополнительные функции до и после её выполнения. В ней фиксируется время начала и окончания работы функции fibonacci, при этом оригинальная функция вызывается с теми же аргументами, которые были переданы в декорированную функцию.
 
 ## Самостоятельная работа №2
 ### Посмотрев на Вовочку, вы также загорелись идеей спортивного программирования, начав тренировки вы узнали, что для решения некоторых задач необходимо считывать данные из файлов. Но через некоторое время вы столкнулись с проблемой что файлы бывают пустыми, и вы не получаете вводные данные для решения задачи. После этого вы решили не просто считывать данные из файла, а всю конструкцию оборачивать в исключения, чтобы избежать такой проблемы. Создайте пустой файл и файл, в котором есть какая-то информация. Напишите код программы. Если файл пустой, то, нужно вызвать исключение (“бросить исключение”) и вывести в консоль “файл пустой”, а если он не пустой, то вывести информацию из файла.
 
 ```python
-class Tomato:
-    states = {'Отсутствует': 0, 'Цветение': 1, 'Зеленый': 2, 'Красный': 3}
+def read_file(file_name):
+    try:
+        with open(file_name, 'r') as file:
+            data = file.read()
 
-    def __init__(self, index):
-        self._index = index
-        self._state = self.states['Отсутствует']
+            if not data:
+                raise Exception("Файл пустой")
+            else:
+                print(data)
 
-    def grow(self):
-        if self._state < 3:
-            self._state += 1
+    except Exception as e:
+        print(e)
 
-    def is_ripe(self):
-        return True if self._state == 3 else False
-
-class TomatoBush:
-    def __init__(self, num):
-        self.tomatoes = [Tomato(index) for index in range(1, num + 1)]
-
-    def grow_all(self):
-        for tomato in self.tomatoes:
-            tomato.grow()
-
-    def all_are_ripe(self):
-        return all([tomato.is_ripe() for tomato in self.tomatoes])
-
-    def give_away_all(self):
-        self.tomatoes = []
-
-class Gardener:
-    def __init__(self, name, plant):
-        self.name = name
-        self._plant = plant
-
-    def work(self):
-        self._plant.grow_all()
-
-    def harvest(self):
-        if self._plant.all_are_ripe():
-            print('Урожай собран!')
-            self._plant.give_away_all()
-        else:
-            print('Подождите, томаты еще не дозрели')
-
-    @staticmethod
-    def knowledge_base():
-        print('Справка по садоводству:\n'
-              '1. Выбирайте сорта томатов, подходящие для вашего региона и климата\n'
-              '2. Заготовьте плодородную почву с хорошим дренажем. Томаты любят рыхлую почву\n'
-              '3. Сажайте рассаду томатов после последнего заморозка\n'
-              '4. Регулярно поливайте томаты, особенно в период созревания плодов\n'
-              '5. Применяйте удобрения с учетом потребностей томатов в питательных веществах\n'
-              '6. Используйте опоры, чтобы поддерживать растения, особенно если у вас высокие сорта томатов\n'
-              '7. Проводите обрезку, чтобы удалить лишние листья и побеги\n'
-              '8. Регулярно осматривайте растения на наличие вредителей и признаков болезней\n')
-
-Gardener.knowledge_base()
-
-tomato_bush = TomatoBush(5)
-gardener = Gardener('Брэд', tomato_bush)
-# print(f"Садовник {gardener.name} выращивает {len(tomato_bush.tomatoes)} томат(а/ов)")
-
-gardener.work()
-# print(f"Томаты находятся в состоянии: '{list(Tomato.states.keys())[tomato_bush.tomatoes[0]._state]}'")
-
-gardener.work()
-gardener.harvest()
-
-gardener.work()
-gardener.work()
-gardener.work()
-gardener.harvest()
+read_file('empty.txt')
+read_file('full_of_information.txt')
 ```
 
 ### Результат.
-![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_10/pic/S102.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_10/pic/S1021.png)
+![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_10/pic/S1022.png)
 
 ## Выводы
 
-1.  Класс Tomato и метод is_ripe предоставляют пример полиморфизма, поскольку разные объекты (томаты) могут использовать один и тот же метод, но с разными результатами в зависимости от своего состояния.
-2.  Защищенные атрибуты создаются путем добавления одного подчеркивания (_) перед именем атрибута или метода. Они используются, когда разработчик хочет запретить доступ снаружи объекта, но дать возможность работать с ними внутри объекта класса-наследника или суперкласса.
-3.  Статические методы декларируются при помощи декоратора staticmethod. Им не нужен определённый первый аргумент (ни self, ни cls). Их можно воспринимать как методы, которые "не знают, к какому классу относятся". Таким образом, статические методы прикреплены к классу лишь для удобства и не могут менять состояние ни класса, ни его экземпляра.
+1. Код включает блок try-except, чтобы обрабатывать исключения. Если возникает ошибка при чтении файла (если файл пустой), программа выведет сообщение об ошибке.
+2. После чтения файла выполняется проверка на пустоту с помощью "if not data". Эту конструкцию можно разложить до выражения "if bool(data) == False", а наличие следующих значений ('', 0, 0.0, False, None, [], (), {}) эквивалентно False.
 
 ## Самостоятельная работа №3
 ### Напишите функцию, которая будет складывать 2 и введенное пользователем число, но если пользователь введет строку или другой неподходящий тип данных, то в консоль выведется ошибка “Неподходящий тип данных. Ожидалось число.”. Реализовать функционал программы необходимо через try/except и подобрать правильный тип исключения. Создавать собственное исключение нельзя. Проведите несколько тестов, в которых исключение вызывается и нет. Результатом выполнения задачи будет листинг кода и получившийся вывод в консоль.
 
 ```python
-class Tomato:
-    states = {'Отсутствует': 0, 'Цветение': 1, 'Зеленый': 2, 'Красный': 3}
+def sum_num():
+    try:
+        number = input("Введите число: ")
+        result = 2 + float(number)
+        print(f"Результат сложения: {result}")
+    except ValueError:
+        print("Неподходящий тип данных. Ожидалось число.")
 
-    def __init__(self, index):
-        self._index = index
-        self._state = self.states['Отсутствует']
-
-    def grow(self):
-        if self._state < 3:
-            self._state += 1
-
-    def is_ripe(self):
-        return True if self._state == 3 else False
-
-class TomatoBush:
-    def __init__(self, num):
-        self.tomatoes = [Tomato(index) for index in range(1, num + 1)]
-
-    def grow_all(self):
-        for tomato in self.tomatoes:
-            tomato.grow()
-
-    def all_are_ripe(self):
-        return all([tomato.is_ripe() for tomato in self.tomatoes])
-
-    def give_away_all(self):
-        self.tomatoes = []
-
-class Gardener:
-    def __init__(self, name, plant):
-        self.name = name
-        self._plant = plant
-
-    def work(self):
-        self._plant.grow_all()
-
-    def harvest(self):
-        if self._plant.all_are_ripe():
-            print('Урожай собран!')
-            self._plant.give_away_all()
-        else:
-            print('Подождите, томаты еще не дозрели')
-
-    @staticmethod
-    def knowledge_base():
-        print('Справка по садоводству:\n'
-              '1. Выбирайте сорта томатов, подходящие для вашего региона и климата\n'
-              '2. Заготовьте плодородную почву с хорошим дренажем. Томаты любят рыхлую почву\n'
-              '3. Сажайте рассаду томатов после последнего заморозка\n'
-              '4. Регулярно поливайте томаты, особенно в период созревания плодов\n'
-              '5. Применяйте удобрения с учетом потребностей томатов в питательных веществах\n'
-              '6. Используйте опоры, чтобы поддерживать растения, особенно если у вас высокие сорта томатов\n'
-              '7. Проводите обрезку, чтобы удалить лишние листья и побеги\n'
-              '8. Регулярно осматривайте растения на наличие вредителей и признаков болезней\n')
-
-Gardener.knowledge_base()
-
-tomato_bush = TomatoBush(5)
-gardener = Gardener('Брэд', tomato_bush)
-# print(f"Садовник {gardener.name} выращивает {len(tomato_bush.tomatoes)} томат(а/ов)")
-
-gardener.work()
-# print(f"Томаты находятся в состоянии: '{list(Tomato.states.keys())[tomato_bush.tomatoes[0]._state]}'")
-
-gardener.work()
-gardener.harvest()
-
-gardener.work()
-gardener.work()
-gardener.work()
-gardener.harvest()
+sum_num()
+sum_num()
+sum_num()
+sum_num()
 ```
 
 ### Результат.
@@ -410,178 +245,133 @@ gardener.harvest()
 
 ## Выводы
 
-1.  Класс Tomato и метод is_ripe предоставляют пример полиморфизма, поскольку разные объекты (томаты) могут использовать один и тот же метод, но с разными результатами в зависимости от своего состояния.
-2.  Защищенные атрибуты создаются путем добавления одного подчеркивания (_) перед именем атрибута или метода. Они используются, когда разработчик хочет запретить доступ снаружи объекта, но дать возможность работать с ними внутри объекта класса-наследника или суперкласса.
-3.  Статические методы декларируются при помощи декоратора staticmethod. Им не нужен определённый первый аргумент (ни self, ни cls). Их можно воспринимать как методы, которые "не знают, к какому классу относятся". Таким образом, статические методы прикреплены к классу лишь для удобства и не могут менять состояние ни класса, ни его экземпляра.
+Сообщения ошибки ValueError возникают, когда передается какой-то параметр функции, функция при этом ожидает один тип данных, а на самом деле передается другой. 
 
 ## Самостоятельная работа №4
 ### Создайте собственный декоратор, который будет использоваться для двух любых вами придуманных функций. Декораторы, которые использовались ранее в работе нельзя воссоздавать. Результатом выполнения задачи будет: класс декоратора, две как-то связанными с ним функциями, скриншот консоли с выполненной программой и подробные комментарии, которые будут описывать работу вашего кода.
 
 ```python
-class Tomato:
-    states = {'Отсутствует': 0, 'Цветение': 1, 'Зеленый': 2, 'Красный': 3}
+def decorator_uppercase(function):
+    def wrapper():
+        func = function()
+        make_uppercase = func.upper()
+        return make_uppercase
+    return wrapper
 
-    def __init__(self, index):
-        self._index = index
-        self._state = self.states['Отсутствует']
+@decorator_uppercase
+def quote1():
+    return 'Teamwork makes the dream work'
 
-    def grow(self):
-        if self._state < 3:
-            self._state += 1
+@decorator_uppercase
+def quote2():
+    return 'Work smarter, not harder'
 
-    def is_ripe(self):
-        return True if self._state == 3 else False
-
-class TomatoBush:
-    def __init__(self, num):
-        self.tomatoes = [Tomato(index) for index in range(1, num + 1)]
-
-    def grow_all(self):
-        for tomato in self.tomatoes:
-            tomato.grow()
-
-    def all_are_ripe(self):
-        return all([tomato.is_ripe() for tomato in self.tomatoes])
-
-    def give_away_all(self):
-        self.tomatoes = []
-
-class Gardener:
-    def __init__(self, name, plant):
-        self.name = name
-        self._plant = plant
-
-    def work(self):
-        self._plant.grow_all()
-
-    def harvest(self):
-        if self._plant.all_are_ripe():
-            print('Урожай собран!')
-            self._plant.give_away_all()
-        else:
-            print('Подождите, томаты еще не дозрели')
-
-    @staticmethod
-    def knowledge_base():
-        print('Справка по садоводству:\n'
-              '1. Выбирайте сорта томатов, подходящие для вашего региона и климата\n'
-              '2. Заготовьте плодородную почву с хорошим дренажем. Томаты любят рыхлую почву\n'
-              '3. Сажайте рассаду томатов после последнего заморозка\n'
-              '4. Регулярно поливайте томаты, особенно в период созревания плодов\n'
-              '5. Применяйте удобрения с учетом потребностей томатов в питательных веществах\n'
-              '6. Используйте опоры, чтобы поддерживать растения, особенно если у вас высокие сорта томатов\n'
-              '7. Проводите обрезку, чтобы удалить лишние листья и побеги\n'
-              '8. Регулярно осматривайте растения на наличие вредителей и признаков болезней\n')
-
-Gardener.knowledge_base()
-
-tomato_bush = TomatoBush(5)
-gardener = Gardener('Брэд', tomato_bush)
-# print(f"Садовник {gardener.name} выращивает {len(tomato_bush.tomatoes)} томат(а/ов)")
-
-gardener.work()
-# print(f"Томаты находятся в состоянии: '{list(Tomato.states.keys())[tomato_bush.tomatoes[0]._state]}'")
-
-gardener.work()
-gardener.harvest()
-
-gardener.work()
-gardener.work()
-gardener.work()
-gardener.harvest()
+if __name__ == '__main__':
+    print(quote1())
+    print(quote2())
 ```
 
 ### Результат.
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_10/pic/S104.png)
 
 ## Выводы
+```python
+def decorator_uppercase(function):
+"""
+Функция декоратора, которая принимает другую функцию в качестве аргумента
+"""
+    def wrapper():
+"""
+Функция, которая будет 'обёрткой' для оригинальной функции.
+"""
+        func = function() # оригинальная функция вызывается, и её результат сохраняется в переменной func
+        make_uppercase = func.upper() # результат func преобразуется в верхний регистр и сохраняется в переменной make_uppercase
+        return make_uppercase
+    return wrapper
 
-1.  Класс Tomato и метод is_ripe предоставляют пример полиморфизма, поскольку разные объекты (томаты) могут использовать один и тот же метод, но с разными результатами в зависимости от своего состояния.
-2.  Защищенные атрибуты создаются путем добавления одного подчеркивания (_) перед именем атрибута или метода. Они используются, когда разработчик хочет запретить доступ снаружи объекта, но дать возможность работать с ними внутри объекта класса-наследника или суперкласса.
-3.  Статические методы декларируются при помощи декоратора staticmethod. Им не нужен определённый первый аргумент (ни self, ни cls). Их можно воспринимать как методы, которые "не знают, к какому классу относятся". Таким образом, статические методы прикреплены к классу лишь для удобства и не могут менять состояние ни класса, ни его экземпляра.
+@decorator_uppercase # применение декоратора к первой функции
+def quote1():
+    return 'Teamwork makes the dream work'
+
+@decorator_uppercase # применение декоратора ко второй функции
+def quote2():
+    return 'Work smarter, not harder'
+
+if __name__ == '__main__': # вывод результатов
+    print(quote1())
+    print(quote2())
+```
+
+Декоратор decorator_uppercase принимает функцию, вызывает ее и преобразует текст в верхний регистр с помощью метода upper(). При использовании этого декоратора для функций quote1 и quote2, они возвращают строку в верхнем регистре. Этот пример демонстрирует, насколько удобно использовать декораторы для добавления определенной функциональности к различным функциям без непосредственного изменения их кода.
 
 ## Самостоятельная работа №5
 ### Создайте собственное исключение, которое будет использоваться в двух любых фрагментах кода. Исключения, которые использовались ранее в работе нельзя воссоздавать. Результатом выполнения задачи будет: класс исключения, код к котором в двух местах используется это исключение, скриншот консоли с выполненной программой и подробные комментарии, которые будут описывать работу вашего кода.
 
 ```python
-class Tomato:
-    states = {'Отсутствует': 0, 'Цветение': 1, 'Зеленый': 2, 'Красный': 3}
+class NoDogsAllowedException(Exception):
+    pass
 
-    def __init__(self, index):
-        self._index = index
-        self._state = self.states['Отсутствует']
+def checking(*items):
+    forbidden_word = 'собака'
 
-    def grow(self):
-        if self._state < 3:
-            self._state += 1
+    for item in items:
+        if forbidden_word in item.lower():
+            raise NoDogsAllowedException('Никаких собак!')
 
-    def is_ripe(self):
-        return True if self._state == 3 else False
+    print('Можете проходить..')
 
-class TomatoBush:
-    def __init__(self, num):
-        self.tomatoes = [Tomato(index) for index in range(1, num + 1)]
+if __name__ == '__main__':
+    group1 = ('Кот', 'Черепаха', 'Попугай')
+    group2 = ('Собака в шляпе', 'Кот', 'Мышь')
 
-    def grow_all(self):
-        for tomato in self.tomatoes:
-            tomato.grow()
+    try:
+        checking(*group1)
+    except NoDogsAllowedException as e:
+        print(e)
 
-    def all_are_ripe(self):
-        return all([tomato.is_ripe() for tomato in self.tomatoes])
-
-    def give_away_all(self):
-        self.tomatoes = []
-
-class Gardener:
-    def __init__(self, name, plant):
-        self.name = name
-        self._plant = plant
-
-    def work(self):
-        self._plant.grow_all()
-
-    def harvest(self):
-        if self._plant.all_are_ripe():
-            print('Урожай собран!')
-            self._plant.give_away_all()
-        else:
-            print('Подождите, томаты еще не дозрели')
-
-    @staticmethod
-    def knowledge_base():
-        print('Справка по садоводству:\n'
-              '1. Выбирайте сорта томатов, подходящие для вашего региона и климата\n'
-              '2. Заготовьте плодородную почву с хорошим дренажем. Томаты любят рыхлую почву\n'
-              '3. Сажайте рассаду томатов после последнего заморозка\n'
-              '4. Регулярно поливайте томаты, особенно в период созревания плодов\n'
-              '5. Применяйте удобрения с учетом потребностей томатов в питательных веществах\n'
-              '6. Используйте опоры, чтобы поддерживать растения, особенно если у вас высокие сорта томатов\n'
-              '7. Проводите обрезку, чтобы удалить лишние листья и побеги\n'
-              '8. Регулярно осматривайте растения на наличие вредителей и признаков болезней\n')
-
-Gardener.knowledge_base()
-
-tomato_bush = TomatoBush(5)
-gardener = Gardener('Брэд', tomato_bush)
-# print(f"Садовник {gardener.name} выращивает {len(tomato_bush.tomatoes)} томат(а/ов)")
-
-gardener.work()
-# print(f"Томаты находятся в состоянии: '{list(Tomato.states.keys())[tomato_bush.tomatoes[0]._state]}'")
-
-gardener.work()
-gardener.harvest()
-
-gardener.work()
-gardener.work()
-gardener.work()
-gardener.harvest()
+    try:
+        checking(*group2)
+    except NoDogsAllowedException as e:
+        print(e)
 ```
 
 ### Результат.
 ![Меню](https://github.com/Alphaverb/Software_Engineering/blob/Tema_10/pic/S105.png)
 
 ## Выводы
+```python
+class NoDogsAllowedException(Exception):
+"""
+Здесь определяется новый класс исключения NoDogsAllowedException, который наследуется от встроенного класса Exception.
+"""
+    pass
 
-1.  Класс Tomato и метод is_ripe предоставляют пример полиморфизма, поскольку разные объекты (томаты) могут использовать один и тот же метод, но с разными результатами в зависимости от своего состояния.
-2.  Защищенные атрибуты создаются путем добавления одного подчеркивания (_) перед именем атрибута или метода. Они используются, когда разработчик хочет запретить доступ снаружи объекта, но дать возможность работать с ними внутри объекта класса-наследника или суперкласса.
-3.  Статические методы декларируются при помощи декоратора staticmethod. Им не нужен определённый первый аргумент (ни self, ни cls). Их можно воспринимать как методы, которые "не знают, к какому классу относятся". Таким образом, статические методы прикреплены к классу лишь для удобства и не могут менять состояние ни класса, ни его экземпляра.
+def checking(*items):
+"""
+Определена функция checking, которая принимает произвольное количество аргументов (*items).
+"""
+    forbidden_word = 'собака' # запрещенное слово
+
+    for item in items: # для каждого элемента в списке
+        if forbidden_word in item.lower(): # если есть запрещенное слово в элементе, приведенном к нижнему регистру..
+            raise NoDogsAllowedException('Никаких собак!') # ..вызывается исключение NoDogsAllowedException
+
+    print('Можете проходить..') # если слово не найдено, выводится это сообщение
+
+if __name__ == '__main__':
+    group1 = ('Кот', 'Черепаха', 'Попугай')
+    group2 = ('Собака в шляпе', 'Кот', 'Мышь')
+
+    try: # проверка первого списка
+        checking(*group1)
+    except NoDogsAllowedException as e:
+        print(e)
+
+    try: # проверка второго списка
+        checking(*group2)
+    except NoDogsAllowedException as e:
+        print(e)
+```
+
+1. Блоки try-except нужны, чтобы обработать исключения с учетом разных сценарев (без необходимости завершения уже работающей программы).
+2. Создание собственных исключений позволяет более точно определить и обработать специфические ошибочные ситуации.
